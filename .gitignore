@@ -3,3 +3,8 @@
 
 # Packaging
 .cask
+
+# Packages
+elpa/*
+
+custom.el

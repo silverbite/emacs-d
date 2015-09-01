@@ -2,6 +2,17 @@
 ;; Windows
 ;;------------------------------------------------------------------------------
 
+;; full path in title bar
+(setq-default frame-title-format "%b (%f)")
+
+;; don't pop up font menu
+;; (global-set-key (kbd "s-t") '(lambda () (interactive)))
+
+;; no bell, removes the audio bell as well as
+;; the black box that appears when audio is disabled
+;; https://github.com/flyingmachine/emacs-for-clojure/blob/master/customizations/ui.el
+(setq ring-bell-function 'ignore)
+
 ;; Navigate windows with M-<arrows>
 (windmove-default-keybindings 'meta)
 (setq windmove-wrap-around t)
@@ -45,10 +56,40 @@
 ;; Use the clipboard, pretty please, so that copy/paste "works"
 (setq x-select-enable-clipboard t)
 
+;; https://github.com/flyingmachine/emacs-for-clojure/blob/master/customizations/misc.el
+;; Changes all yes/no questions to y/n type
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; shell scripts
+(setq-default sh-basic-offset 2)
+(setq-default sh-indentation 2)
+
+;; No need for ~ files when editing
+(setq create-lockfiles nil)
 
 ;;------------------------------------------------------------------------------
 ;; Others
 ;;------------------------------------------------------------------------------
+
+;; make indentation commands use space only (never tab character)
+(setq-default indent-tabs-mode nil)    ; use only spaces and no tabs
+
+;; set default tab char's display width to 4 spaces
+(setq default-tab-width 4)
+
+;; set current buffer's tab char's display width to 4 spaces
+(setq tab-width 4)
+
+;; Column number mode
+(setq column-number-mode t)
+
+;; Window navigation using shift + <direction>
+;; (windmove-default-keybindings)
+
+;; Undo window kills
+;; http://www.emacswiki.org/emacs/WinnerMode
+;; (when (fboundp 'winner-mode)
+;;   (winner-mode 1))
 
 ;;;; remaps
 (define-key key-translation-map (kbd "<C-tab>") (kbd "M-TAB"))
@@ -57,9 +98,7 @@
 
 (define-key 'help-command "a" 'apropos)
 
-;;----------------------------------------------------------------------------
 ;; Allow access from emacsclient
-;;----------------------------------------------------------------------------
 (require 'server)
 (unless (server-running-p)
   (server-start))
@@ -70,6 +109,24 @@
   (set-frame-parameter nil 'fullscreen
 		       (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 (global-set-key [f11] 'fullscreen)
+
+
+;;------------------------------------------------------------------------------
+;; Garbage collection tuning
+;;------------------------------------------------------------------------------
+;; https://github.com/lewang/flx
+
+;; By default Emacs will initiate GC every 0.76 MB allocated (gc-cons-threshold == 800000). If we increase this to 20 MB (gc-cons-threshold == 20000000) we get:
+
+;; (benchmark-run 1
+;;   (setq gc-cons-threshold 20000000)
+;;   (let ((cache (flx-make-filename-cache)))
+;;     (dolist (i (number-sequence 0 10000))
+;;       (flx-process-cache (uuid) cache))))
+;;     ;;; ⇒ (0.62035 1 0.05461100000000041)
+
+;; So if you have a modern machine, I encourage you to add the following:
+(setq gc-cons-threshold 20000000)
 
 
 (provide 'xt-config)

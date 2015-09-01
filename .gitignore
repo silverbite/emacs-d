@@ -7,4 +7,11 @@
 # Packages
 elpa/*
 
+# xitkov
 custom.el
+.ido.last
+history
+.emacs_workgroups
+projectile-bookmarks.eld
+smex-items
+

@@ -11,6 +11,10 @@
 (global-hl-line-mode)			; highlight current line
 ;; (global-linum-mode 1)                   ; add line numbers on the left
 
+(setq visible-bell t)
+(setq font-lock-maximum-decoration t)
+(setq color-theme-is-global t)
+(setq truncate-partial-width-windows nil)
 
 ;;-----------------------------------------------------------------------------
 ;; Remove GUI elements
@@ -43,6 +47,25 @@
 
 
 ;;------------------------------------------------------------------------------
+;; Unclutter the modeline
+;;------------------------------------------------------------------------------
+;; https://github.com/magnars/.emacs.d/blob/master/settings/appearance.el
+
+(package-require 'diminish)
+(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+(eval-after-load "eldoc" '(diminish 'eldoc-mode))
+(eval-after-load "paredit" '(diminish 'paredit-mode))
+(eval-after-load "tagedit" '(diminish 'tagedit-mode))
+(eval-after-load "elisp-slime-nav" '(diminish 'elisp-slime-nav-mode))
+(eval-after-load "skewer-mode" '(diminish 'skewer-mode))
+(eval-after-load "skewer-css" '(diminish 'skewer-css-mode))
+(eval-after-load "skewer-html" '(diminish 'skewer-html-mode))
+(eval-after-load "smartparens" '(diminish 'smartparens-mode))
+(eval-after-load "guide-key" '(diminish 'guide-key-mode))
+(eval-after-load "whitespace-cleanup-mode" '(diminish 'whitespace-cleanup-mode))
+(eval-after-load "subword" '(diminish 'subword-mode))
+
+;;------------------------------------------------------------------------------
 ;; Sexy mode line
 ;;------------------------------------------------------------------------------
 
@@ -52,6 +75,8 @@
 
 ;; Smart mode line
 (require-package 'smart-mode-line)
+
+(setq sml/no-confirm-load-theme t)
 
 ;; (setq sml/theme 'dark)
 (setq sml/theme 'light)

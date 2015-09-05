@@ -14,4 +14,8 @@ history
 .emacs_workgroups
 projectile-bookmarks.eld
 smex-items
+tramp
+
+eshell/*
+.recentf
 

@@ -51,7 +51,7 @@
 ;;------------------------------------------------------------------------------
 ;; https://github.com/magnars/.emacs.d/blob/master/settings/appearance.el
 
-(package-require 'diminish)
+(require-package 'diminish)
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
 (eval-after-load "eldoc" '(diminish 'eldoc-mode))
 (eval-after-load "paredit" '(diminish 'paredit-mode))

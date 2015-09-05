@@ -55,6 +55,7 @@
 
 ;; Use the clipboard, pretty please, so that copy/paste "works"
 (setq x-select-enable-clipboard t)
+(setq x-select-enable-primary t)
 
 ;; https://github.com/flyingmachine/emacs-for-clojure/blob/master/customizations/misc.el
 ;; Changes all yes/no questions to y/n type
@@ -83,6 +84,9 @@
 ;; Column number mode
 (setq column-number-mode t)
 
+;; Show matching parenthesis
+(show-paren-mode 1)
+
 ;; Window navigation using shift + <direction>
 ;; (windmove-default-keybindings)
 
@@ -110,7 +114,6 @@
 		       (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 (global-set-key [f11] 'fullscreen)
 
-
 ;;------------------------------------------------------------------------------
 ;; Garbage collection tuning
 ;;------------------------------------------------------------------------------
@@ -128,6 +131,17 @@
 ;; So if you have a modern machine, I encourage you to add the following:
 (setq gc-cons-threshold 20000000)
 
+;; Require final new line
+(setq require-final-newline t)
+
+;; (setq save-interprogram-paste-before-kill t)
+;; (setq apropos-do-all t)
+;; (setq mouse-yank-at-point t)
+;; (setq visible-bell t)
+;; (setq load-prefer-newer t)
+;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+;; (setq save-place-file (concat user-emacs-directory "places"))
+;; (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+
 
 (provide 'xt-config)
-

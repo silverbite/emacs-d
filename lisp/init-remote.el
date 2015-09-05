@@ -2,7 +2,7 @@
 ;; Packages that help with remote systems
 ;;------------------------------------------------------------------------------
 
-(require-package 'tramp)
+(require 'tramp)
 
 (setq tramp-default-method "ssh")
 

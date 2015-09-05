@@ -15,16 +15,20 @@
 (defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
 (defconst *is-a-mac* (eq system-type 'darwin))
 
+(let ((default-directory "/usr/local/share/emacs/site-lisp/"))
+  (normal-top-level-add-subdirs-to-load-path))
+
 
 ;;----------------------------------------------------------------------------
-;; Bootstrap config
+;; Bootstrap
 ;;----------------------------------------------------------------------------
 
 (add-to-list 'load-path (expand-file-name "bootstrap" user-emacs-directory))
-(require 'xt-utils)       ;; Utilities
-(require 'xt-melpa)       ;; Machinery for installing required packages
-(require 'xt-env-vars)    ;; Set up $PATH and env
-(require 'xt-config)      ;; Utilities
+(require 'xt-utils)                     ;; Utilities
+(require 'xt-melpa)                     ;; Machinery for installing required packages
+(require 'xt-env-vars)                  ;; Set up $PATH and env
+(require 'xt-sane-defaults)                    ;; Utilities
+(require 'xt-default-keybindings)       ;; Utilities
 
 
 ;;----------------------------------------------------------------------------
@@ -33,6 +37,14 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 (require 'xt-packages)
+;; (require 'xt-modes)
+
+
+;;----------------------------------------------------------------------------
+;; Load my Lisp stuff
+;;----------------------------------------------------------------------------
+;; (add-to-list 'load-path (expand-file-name "src" user-emacs-directory))
+;; (require 'xt-src)
 
 
 (provide 'init)

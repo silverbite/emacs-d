@@ -1,3 +1,7 @@
+;;------------------------------------------------------------------------------
+;; Bootstrap package.el support
+;;------------------------------------------------------------------------------
+
 (require 'package)
 
 ;;; Standard package repositories
@@ -42,7 +46,7 @@ locate PACKAGE."
 (require-package 'fullframe)
 (fullframe list-packages quit-window)
 
-
+;;; Common Lisp
 (require-package 'cl)
 (require-package 'cl-lib)
 

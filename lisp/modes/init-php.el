@@ -1,10 +1,5 @@
 ;;------------------------------------------------------------------------------
-;; Enable/Disable packages from here
+;; PHP mode
 ;;------------------------------------------------------------------------------
 
-(require 'init-ido)
-(require 'init-shell)
-(require 'init-project)
-
-
-(provide 'xt-packages)
+(provide 'init-php)

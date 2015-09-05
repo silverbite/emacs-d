@@ -1,10 +1,5 @@
 ;;------------------------------------------------------------------------------
-;; Enable/Disable packages from here
+;; Support Major File modes
 ;;------------------------------------------------------------------------------
 
-(require 'init-ido)
-(require 'init-shell)
-(require 'init-project)
-
-
-(provide 'xt-packages)
+(provide 'xt-modes)

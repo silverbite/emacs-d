@@ -72,6 +72,11 @@
 ;; Others
 ;;------------------------------------------------------------------------------
 
+;; Remove trailing whitespace on saving
+;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; http://batsov.com/articles/2011/11/25/emacs-tip-number-3-whitespace-cleanup/
+(add-hook 'before-save-hook 'whitespace-cleanup)
+
 ;; make indentation commands use space only (never tab character)
 (setq-default indent-tabs-mode nil)    ; use only spaces and no tabs
 
@@ -111,7 +116,7 @@
 (defun fullscreen ()
   (interactive)
   (set-frame-parameter nil 'fullscreen
-		       (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
+               (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 (global-set-key [f11] 'fullscreen)
 
 ;;------------------------------------------------------------------------------
@@ -339,12 +344,12 @@
 (setq initial-scratch-message "")       ; don't use messages that you don't read
 (setq inhibit-startup-screen t)         ; No splash screen please... jeez
 (setq inhibit-startup-message t)        ; No message at startup
-(setq inhibit-splash-screen t)	        ; no splash screen, thanks
+(setq inhibit-splash-screen t)          ; no splash screen, thanks
 (setq visible-bell t)                   ; don't let Emacs hurt your ears
 
 ;; avoid compiz manager rendering bugs
-(add-to-list 'default-frame-alist '(alpha . 100))
-(add-to-list 'default-frame-alist '(font . "")); Change fonts
+;; (add-to-list 'default-frame-alist '(alpha . 100))
+;; (add-to-list 'default-frame-alist '(font . "")); Change fonts
 
 ;;------------------------------------------------------------------------------
 ;; Fonts, themes

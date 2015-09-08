@@ -15,6 +15,7 @@
 
 ;; Using web-mode for editing plain HTML files can be done this way
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
 
 (setq web-mode-engines-alist
       '(("php"    . "\\.phtml\\'")

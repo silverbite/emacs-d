@@ -4,7 +4,7 @@
 
 (require-package 'sh-script)
 
-;; recognize pretzo files as zsh scripts
+;;; recognize pretzo files as zsh scripts
 (defvar xt-pretzo-files '("zlogin" "zlogin" "zlogout" "zpretzorc" "zprofile" "zshenv" "zshrc"))
 
 (mapc (lambda (file)
@@ -17,6 +17,17 @@
                      (member (file-name-nondirectory buffer-file-name) xt-pretzo-files))
                 (sh-set-shell "zsh"))))
 
+;;; Bash files
+;; https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-sh.el
+
+(add-to-list 'auto-mode-alist '("\\.bash_profile\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.bash_history\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.sh\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.bash\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.bashrc.local\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.bashrc\\'" . sh-mode))
+
+
 ;;------------------------------------------------------------------------------
 ;; Packages that help with remote systems
 ;;------------------------------------------------------------------------------
@@ -27,11 +38,11 @@
 
 ;; use /sudo:ssh-host:remote-path
 (add-to-list 'tramp-default-proxies-alist
-	     '(nil "\\`root\\'" "/ssh:%h:"))
+         '(nil "\\`root\\'" "/ssh:%h:"))
 (add-to-list 'tramp-default-proxies-alist
-	     '((regexp-quote (system-name)) nil nil))
+         '((regexp-quote (system-name)) nil nil))
 (add-to-list 'tramp-default-proxies-alist
-	     '("localhost" nil nil))
+         '("localhost" nil nil))
 
 
 (provide 'init-shell)

@@ -1,7 +1,14 @@
 (when *is-a-mac*
-  ;; (setq mac-command-modifier 'meta)
-  ;; (setq mac-option-modifier 'none)
-  ;; (setq default-input-method "MacOSX")
+  ;; set keys for Apple keyboard, for emacs in OS X
+  (setq mac-option-key-is-meta nil)
+  (setq mac-command-key-is-meta t)
+
+  (setq mac-command-modifier 'meta)      ; make cmd key do Meta
+  (setq mac-option-modifier 'super)      ; make opt key do Super
+  (setq mac-control-modifier 'control)   ; make Control key do Control
+  ;; (setq ns-function-modifier 'hyper)  ; make Fn key do Hyper
+
+  (setq default-input-method "MacOSX")
   ;; Make mouse wheel / trackpad scrolling less jerky
   (setq mouse-wheel-scroll-amount '(1
                                     ((shift) . 5)

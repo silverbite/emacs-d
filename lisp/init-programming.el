@@ -17,6 +17,16 @@
         try-expand-dabbrev-all-buffers
         try-expand-dabbrev-from-kill))
 
+;;; Rainbow delimiters
+(require-package 'rainbow-delimiters)
+(require 'rainbow-delimiters)
+
+;; No more :(
+;; (global-rainbow-delimiters-mode)
+
+;;; Rainbow mode
+(require-package 'rainbow-mode)
+
 
 ;;------------------------------------------------------------------------------
 ;; Multiple major modes

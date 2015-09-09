@@ -206,6 +206,7 @@
 (setq uniquify-after-kill-buffer-p t)
 (setq uniquify-ignore-buffers-re "^\\*")
 
+;; @see http://www.emacswiki.org/emacs/SavePlace
 (require-package 'saveplace)
 (setq-default save-place t)
 

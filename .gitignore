@@ -19,3 +19,5 @@ tramp
 eshell/*
 .recentf
 
+projectile.cache
+

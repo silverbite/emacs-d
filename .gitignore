@@ -20,4 +20,6 @@ eshell/*
 .recentf
 
 projectile.cache
+.python-environments/*
+snippets/*
 

@@ -10,6 +10,7 @@
 ;; (require 'init-sessions)
 ;; (require 'init-workgroups)
 (require 'init-programming)
-
+(require 'init-company)
+(require 'init-yasnippet)
 
 (provide 'xt-packages)

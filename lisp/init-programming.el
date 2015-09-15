@@ -25,8 +25,11 @@
 ;; (global-rainbow-delimiters-mode)
 
 ;;; Rainbow mode
+
 (require-package 'rainbow-mode)
 
+;; Enable rainbow mode
+(rainbow-mode)
 
 ;;------------------------------------------------------------------------------
 ;; Multiple major modes
@@ -43,6 +46,20 @@
 ;;; Neotree
 (require-package 'neotree)
 (global-set-key [f8] 'neotree-toggle)
+
+;; Smart parens
+;;;https://github.com/Fuco1/smartparens
+(require-package 'smartparens)
+(require 'smartparens-config)
+
+;; Expand region
+;;; https://github.com/atlefren/.emacs.d/blob/master/lisp/init-expand-region.el
+(require-package 'expand-region)
+(require 'expand-region)
+;; keybinding
+(global-set-key (kbd "C-c s") 'er/expand-region)
+;; (global-set-key (kbd "<M-up>") 'er/expand-region)
+;; (global-set-key (kbd "<M-down>") 'er/contract-region)
 
 
 (provide 'init-programming)

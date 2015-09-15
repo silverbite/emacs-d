@@ -92,6 +92,10 @@
 ;; Show matching parenthesis
 (show-paren-mode 1)
 
+;; Use unix Line endings
+(setq-default buffer-file-coding-system 'utf-8-unix)
+
+
 ;; Window navigation using shift + <direction>
 ;; (windmove-default-keybindings)
 
@@ -118,6 +122,30 @@
   (set-frame-parameter nil 'fullscreen
                (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
 (global-set-key [f11] 'fullscreen)
+
+;; Disable auto-save and auto-backup
+;; http://emacsredux.com/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/
+
+;; (setq auto-save-default nil)
+;; (setq make-backup-files nil)
+
+;; store all backup and autosave files in the tmp dir
+;; (setq backup-directory-alist
+;;       `((".*" . ,temporary-file-directory)))
+;; (setq auto-save-file-name-transforms
+;;       `((".*" ,temporary-file-directory t)))
+
+
+;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
+;; https://snarfed.org/gnu_emacs_backup_files
+
+(custom-set-variables
+ '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
+ '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
+
+;; create the autosave dir if necessary, since emacs won't.
+(make-directory "~/.emacs.d/autosaves/" t)
+
 
 ;;------------------------------------------------------------------------------
 ;; Garbage collection tuning
@@ -210,7 +238,7 @@
 (require-package 'saveplace)
 (setq-default save-place t)
 
-(setq save-place-file "~/.emacs.d/saved-places")
+(setq save-place-file (concat user-emacs-directory ".saved-places"))
 (setq save-place-forget-unreadable-files nil)
 
 ;; Turn on recent file mode so that you can more easily switch to
@@ -308,14 +336,14 @@
 (setq track-eol nil)                           ; Cursor don't track end-of-line
 (setq mouse-yank-at-point t)                   ; Paste at cursor position
 (setq scroll-preserve-screen-position t)       ; Scroll without moving cursor
-;; (set-cursor-color "black")                     ; Cursor color
+;; (set-cursor-color "black")                  ; Cursor color
 (mouse-avoidance-mode 'jump)                   ; Mouse avoids cursor
 (mouse-wheel-mode t)
 
-(line-number-mode 1)			; have line numbers and
-(column-number-mode t)			; column numbers in the mode line
-(global-hl-line-mode t)			; highlight current line
-;; (global-linum-mode 1)                   ; add line numbers on the left
+(line-number-mode 1)                           ; have line numbers and
+(column-number-mode t)                         ; column numbers in the mode line
+(global-hl-line-mode t)                        ; highlight current line
+;; (global-linum-mode 1)                       ; add line numbers on the left
 
 (global-font-lock-mode 1)                      ; Color enabled
 (setq font-lock-maximum-decoration t)
@@ -323,8 +351,17 @@
 (setq truncate-partial-width-windows nil)
 
 (define-key menu-bar-tools-menu [games] nil)   ; Remove games menu
-;; (set-background-color "darkblue")              ; Background color
-;; (set-face-background 'region "gray80")         ; Color for selected lines
+;; (set-background-color "darkblue")           ; Background color
+;; (set-face-background 'region "gray80")      ; Color for selected lines
+
+
+;; Nyan cat for emacs!
+(require-package 'nyan-mode)
+
+;; (setq nyan-wavy-trail t)
+;; (setq nyan-animate-nyancat t)
+
+(nyan-mode t)
 
 
 ;;-----------------------------------------------------------------------------

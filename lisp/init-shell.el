@@ -27,6 +27,12 @@
 (add-to-list 'auto-mode-alist '("\\.bashrc.local\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.bashrc\\'" . sh-mode))
 
+;; xitkov's files
+(add-to-list 'auto-mode-alist '("\\.exports\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.aliasess\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.functions\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.sources\\'" . sh-mode))
+
 
 ;;------------------------------------------------------------------------------
 ;; Packages that help with remote systems

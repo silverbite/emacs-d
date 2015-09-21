@@ -32,6 +32,7 @@
 (add-to-list 'auto-mode-alist '("\\.aliasess\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.functions\\'" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.sources\\'" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.zsh-theme\\'" . sh-mode))
 
 
 ;;------------------------------------------------------------------------------

@@ -2,10 +2,15 @@
 ;; Support Major File modes
 ;;------------------------------------------------------------------------------
 
+;; Markup modes
+(require 'init-markdown)
 (require 'init-nxml)
-(require 'init-php)
 (require 'init-haml)
 (require 'init-web)
+
+;; Programming languages
+(require 'init-php)
 (require 'init-go)
+
 
 (provide 'xt-modes)

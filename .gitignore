@@ -22,4 +22,5 @@ eshell/*
 projectile.cache
 .python-environments/*
 snippets/*
+autosaves/*
 

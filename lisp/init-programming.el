@@ -61,5 +61,15 @@
 ;; (global-set-key (kbd "<M-up>") 'er/expand-region)
 ;; (global-set-key (kbd "<M-down>") 'er/contract-region)
 
+;;------------------------------------------------------------------------------
+;; Gitgutter
+;;------------------------------------------------------------------------------
+;; https://github.com/syohex/emacs-git-gutter
+(require-package 'git-gutter)
+(require 'git-gutter)
+
+;; If you want to use git-gutter for files in git repository.
+(global-git-gutter-mode +1)
+
 
 (provide 'init-programming)

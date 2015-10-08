@@ -354,14 +354,11 @@
 ;; (set-background-color "darkblue")           ; Background color
 ;; (set-face-background 'region "gray80")      ; Color for selected lines
 
-
 ;; Nyan cat for emacs!
-(require-package 'nyan-mode)
-
+;; (require-package 'nyan-mode)
 ;; (setq nyan-wavy-trail t)
 ;; (setq nyan-animate-nyancat t)
-
-(nyan-mode t)
+;; (nyan-mode t)
 
 
 ;;-----------------------------------------------------------------------------

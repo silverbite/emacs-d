@@ -48,3 +48,4 @@
 
 
 (provide 'init)
+(put 'upcase-region 'disabled nil)

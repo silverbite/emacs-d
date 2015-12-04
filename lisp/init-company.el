@@ -36,11 +36,11 @@
 (delete 'company-ctags company-backends)
 
 ;; Python autocomplete
-;; (require-package 'company-anaconda)
-;; (require 'company-anaconda)
+(require-package 'company-anaconda)
+(require 'company-anaconda)
 
-;; (add-to-list 'company-backends 'company-anaconda)
-;; (add-hook 'python-mode-hook 'anaconda-mode)
+(add-to-list 'company-backends 'company-anaconda)
+(add-hook 'python-mode-hook 'anaconda-mode)
 
 ;; LaTeX
 (require-package 'company-auctex)
@@ -62,10 +62,10 @@
 (add-to-list 'company-backends 'company-readline)
 ;; (push 'company-readline company-backends)
 
-(require-package 'company-jedi)
+;; (require-package 'company-jedi)
 ;; This is a company-backend for emacs-jedi. Add this backend to the
 ;; Basic usage.
-(add-to-list 'company-backends 'company-jedi)
+;; (add-to-list 'company-backends 'company-jedi)
 ;; Advanced usage.
 ;; (add-to-list 'company-backends '(company-jedi company-files))
 

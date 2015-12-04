@@ -57,7 +57,8 @@
 (require-package 'expand-region)
 (require 'expand-region)
 ;; keybinding
-(global-set-key (kbd "C-c s") 'er/expand-region)
+;; (global-set-key (kbd "C-c s") 'er/expand-region)
+(global-set-key (kbd "C-=") 'er/expand-region)
 ;; (global-set-key (kbd "<M-up>") 'er/expand-region)
 ;; (global-set-key (kbd "<M-down>") 'er/contract-region)
 

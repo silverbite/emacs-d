@@ -147,6 +147,15 @@
 (make-directory "~/.emacs.d/autosaves/" t)
 
 
+;; Disable scrolling
+;; scroll one line at a time (less "jumpy" than defaults)
+;; http://fgiasson.com/blog/index.php/2014/05/22/my-optimal-gnu-emacs-settings-for-developing-clojure-so-far/
+;; (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+;; (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+;; (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+;; (setq scroll-step 1) ;; keyboard scroll one line at a time
+
+
 ;;------------------------------------------------------------------------------
 ;; Garbage collection tuning
 ;;------------------------------------------------------------------------------
@@ -238,6 +247,7 @@
 (require-package 'saveplace)
 (setq-default save-place t)
 
+;;(setq save-place-file (expand-file-name ".places" user-emacs-directory)))
 (setq save-place-file (concat user-emacs-directory ".saved-places"))
 (setq save-place-forget-unreadable-files nil)
 
@@ -247,9 +257,17 @@
 
 (setq recentf-save-file (concat user-emacs-directory ".recentf"))
 
-(recentf-mode 1)
+(setq recentf-max-saved-items 300
+      recentf-exclude '("/auto-install/" ".recentf" "/repos/" "/elpa/"
+                        "\\.mime-example" "\\.ido.last" "COMMIT_EDITMSG"
+                        ".gz" "/anaconda-mode" "/auto-save-list" "/autosaves"
+                        "~$" "/tmp/" "/ssh:" "/sudo:" "/scp:" "semanticdb"
+                        "/backups" "/eshell" "/project-explorer-cache" )
+      recentf-auto-cleanup 600)
 
 (setq recentf-max-menu-items 40)
+
+(recentf-mode 1)
 
 
 ;;------------------------------------------------------------------------------
@@ -396,6 +414,106 @@
     (set-face-font 'default "Source Code Pro-12")
   (set-face-font 'default "Monospace-10"))
 
+(require-package 'noctilux-theme)
+;; Noctilus Theme
+(load-theme 'noctilux t)
+
+
+;;------------------------------------------------------------------------------
+;; Sexy mode line
+;;------------------------------------------------------------------------------
+
+;; Powerline
+;; (require-package 'powerline)
+;; (powerline-default-theme)
+
+;; Smart mode line
+(require-package 'smart-mode-line)
+
+(setq sml/no-confirm-load-theme t)
+
+;; (setq sml/theme 'dark)
+;; (setq sml/theme 'light)
+(setq sml/theme 'respectful)
+
+(sml/setup)
+
+;; (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/Projects/In-Development/" ":ProjDev:") t)
+;; (add-to-list 'sml/replacer-regexp-list '("^~/Documents/Work/" ":Work:") t)
+
+;; Added in the right order, they even work sequentially:
+;; (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/" ":DB:") t)
+;; (add-to-list 'sml/replacer-regexp-list '("^:DB:Documents" ":DDocs:") t)
+;; (add-to-list 'sml/replacer-regexp-list '("^~/Git-Projects/" ":Git:") t)
+;; (add-to-list 'sml/replacer-regexp-list '("^:Git:\\(.*\\)/src/main/java/" ":G/\\1/SMJ:") t)
+
+
+;;------------------------------------------------------------------------------
+;; http://zeekat.nl/articles/making-emacs-work-for-me.html
+;;------------------------------------------------------------------------------
+
+;; Show current time
+(setq display-time-24hr-format t)
+(display-time-mode +1)
+
+;; Prefer single frames
+(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+
+;; Start with an empty scratch buffer in org mode; no start up screen.
+(setq initial-major-mode 'org-mode)
+
+;;------------------------------------------------------------------------------
+;; http://writequit.org/org/settings.html#sec-1-3-12
+;;------------------------------------------------------------------------------
+
+(setq whitespace-line-column 140)
+
+(setq whitespace-style '(tabs newline space-mark
+                              tab-mark newline-mark
+                              face lines-tail))
+
+(setq whitespace-display-mappings
+      ;; all numbers are Unicode codepoint in decimal. e.g. (insert-char 182 1)
+      ;; 32 SPACE, 183 MIDDLE DOT
+      '((space-mark nil)
+        ;; 10 LINE FEED
+        ;;(newline-mark 10 [172 10])
+        (newline-mark nil)
+        ;; 9 TAB, MIDDLE DOT
+        (tab-mark 9 [183 9] [92 9])))
+
+(setq whitespace-global-modes '(not org-mode
+                                    eshell-mode
+                                    shell-mode
+                                    web-mode
+                                    log4j-mode
+                                    "Web"
+                                    dired-mode
+                                    emacs-lisp-mode
+                                    clojure-mode
+                                    lisp-mode))
+
+;; turn on whitespace mode globally
+(global-whitespace-mode 1)
+
+(set-default 'indicate-empty-lines t)
+(setq show-trailing-whitespace t)
+
+(paredit-mode 1)
+(eldoc-mode 1)
+
+(setq eldoc-idle-delay 0.3)
+(set-face-attribute 'eldoc-highlight-function-argument nil
+                    :underline t :foreground "green"
+                    :weight 'bold)
+
+;; Change the faces for elisp regex grouping: 
+(set-face-foreground 'font-lock-regexp-grouping-backslash "#ff1493")
+(set-face-foreground 'font-lock-regexp-grouping-construct "#ff8c00")
+
+;; http://writequit.org/org/settings.html#sec-1-3-12
+(setq-default indicate-buffer-boundaries 'right)
+(toggle-indicate-empty-lines)
 
 ;;------------------------------------------------------------------------------
 ;; Unclutter the modeline
@@ -415,34 +533,11 @@
 (eval-after-load "guide-key" '(diminish 'guide-key-mode))
 (eval-after-load "whitespace-cleanup-mode" '(diminish 'whitespace-cleanup-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
+(eval-after-load "whitespace" '(diminish 'global-whitespace-mode))
 
-;;------------------------------------------------------------------------------
-;; Sexy mode line
-;;------------------------------------------------------------------------------
 
-;; Powerline
-;; (require-package 'powerline)
-;; (powerline-default-theme)
-
-;; Smart mode line
-(require-package 'smart-mode-line)
-
-(setq sml/no-confirm-load-theme t)
-
-;; (setq sml/theme 'dark)
-(setq sml/theme 'light)
-;; (setq sml/theme 'respectful)
-
-(sml/setup)
-
-;; (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/Projects/In-Development/" ":ProjDev:") t)
-;; (add-to-list 'sml/replacer-regexp-list '("^~/Documents/Work/" ":Work:") t)
-
-;; Added in the right order, they even work sequentially:
-;; (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/" ":DB:") t)
-;; (add-to-list 'sml/replacer-regexp-list '("^:DB:Documents" ":DDocs:") t)
-;; (add-to-list 'sml/replacer-regexp-list '("^~/Git-Projects/" ":Git:") t)
-;; (add-to-list 'sml/replacer-regexp-list '("^:Git:\\(.*\\)/src/main/java/" ":G/\\1/SMJ:") t)
+;; Start with frame maximized
+;; (toggle-frame-maximized)
 
 
 (provide 'xt-sane-defaults)

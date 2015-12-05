@@ -97,12 +97,83 @@
 ;;----------------------------------------------------------------------------
 ;; JSON beautify-json
 ;;----------------------------------------------------------------------------
+
 (defun beautify-json ()
   "Beutify JSON buffer"
   (interactive)
   (let ((b (if mark-active (min (point) (mark)) (point-min)))
         (e (if mark-active (max (point) (mark)) (point-max))))
     (shell-command-on-region b e "python -mjson.tool" (current-buffer) t)))
+
+
+;;----------------------------------------------------------------------------
+;; http://writequit.org/org/settings.html#sec-1-3-12
+;;----------------------------------------------------------------------------
+
+(defun xt/untabify-buffer ()
+  (interactive)
+  (untabify (point-min) (point-max)))
+
+(defun xt/indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defun xt/cleanup-buffer ()
+  "Perform a bunch of operations on the whitespace content of a buffer."
+  (interactive)
+  (indent-buffer)
+  (untabify-buffer)
+  (delete-trailing-whitespace))
+
+(defun xt/number-rectangle (start end format-string from)
+  "Delete (don't save) text in the region-rectangle, then number it."
+  (interactive
+   (list (region-beginning) (region-end)
+         (read-string "Number rectangle: "
+                      (if (looking-back "^ *") "%d. " "%d"))
+         (read-number "From: " 1)))
+  (save-excursion
+    (goto-char start)
+    (setq start (point-marker))
+    (goto-char end)
+    (setq end (point-marker))
+    (delete-rectangle start end)
+    (goto-char start)
+    (loop with column = (current-column)
+          while (and (<= (point) end) (not (eobp)))
+          for i from from   do
+          (move-to-column column t)
+          (insert (format format-string i))
+          (forward-line 1)))
+  (goto-char start))
+
+;; (global-set-key (kbd "C-x r N") 'number-rectangle)
+
+(defun xt/insert-lod ()
+  "Well. This is disappointing."
+  (interactive)
+  (insert "ಠ_ಠ"))
+
+(global-set-key (kbd "C-c M-d") 'my/insert-lod)
+
+
+(defcustom smart-to-ascii '(("\x201C" . "\"")
+                            ("\x201D" . "\"")
+                            ("\x2018" . "'")
+                            ("\x2019" . "'")
+                            ;; en-dash
+                            ("\x2013" . "-")
+                            ;; em-dash
+                            ("\x2014" . "-"))
+  "Map of smart quotes to their replacements"
+  :type '(repeat (cons (string :tag "Smart Character  ")
+                       (string :tag "Ascii Replacement"))))
+
+(defun xt/smart-to-ascii (beg end)
+  "Replace smart quotes and dashes with their ASCII equivalents"
+  (interactive "r")
+  (format-replace-strings smart-to-ascii
+                          nil beg end))
 
 
 (provide 'xt-utils)

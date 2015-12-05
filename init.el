@@ -27,7 +27,7 @@
 (require 'xt-utils)                     ;; Utilities
 (require 'xt-melpa)                     ;; Machinery for installing required packages
 (require 'xt-env-vars)                  ;; Set up $PATH and env
-(require 'xt-sane-defaults)                    ;; Utilities
+(require 'xt-sane-defaults)             ;; Sane defaults
 (require 'xt-default-keybindings)       ;; Utilities
 
 

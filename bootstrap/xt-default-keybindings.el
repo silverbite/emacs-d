@@ -27,4 +27,11 @@
 (global-set-key (kbd "M-h") 'backward-kill-word)
 
 
+;; http://fgiasson.com/blog/index.php/2014/05/22/my-optimal-gnu-emacs-settings-for-developing-clojure-so-far/
+;; (global-set-key [f8] 'other-frame)
+;; (global-set-key [f7] 'paredit-mode)
+;; (global-set-key [f9] 'cider-jack-in)
+;; (global-set-key [f11] 'speedbar)
+
+
 (provide 'xt-default-keybindings)

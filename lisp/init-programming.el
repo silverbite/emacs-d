@@ -62,9 +62,19 @@
 ;; (global-set-key (kbd "<M-up>") 'er/expand-region)
 ;; (global-set-key (kbd "<M-down>") 'er/contract-region)
 
+
 ;;------------------------------------------------------------------------------
-;; Gitgutter
+;; Git related
 ;;------------------------------------------------------------------------------
+
+;; http://zeekat.nl/articles/making-emacs-work-for-me.html
+(require-package 'magit)
+(require 'magit)
+
+;; (setq magit-default-tracking-name-function #'magit-default-tracking-name-branch-only)
+;; (setq magit-last-seen-setup-instructions "1.4.0")
+
+
 ;; https://github.com/syohex/emacs-git-gutter
 (require-package 'git-gutter)
 (require 'git-gutter)

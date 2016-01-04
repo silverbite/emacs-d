@@ -12,5 +12,7 @@
 (require 'init-programming)
 (require 'init-company)
 (require 'init-yasnippet)
+(require 'init-tags)
+
 
 (provide 'xt-packages)

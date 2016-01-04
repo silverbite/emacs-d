@@ -19,13 +19,14 @@
 
 ;;; Rainbow delimiters
 (require-package 'rainbow-delimiters)
-(require 'rainbow-delimiters)
+
+;; Elisp
+(add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
 
 ;; No more :(
 ;; (global-rainbow-delimiters-mode)
 
 ;;; Rainbow mode
-
 (require-package 'rainbow-mode)
 
 ;; Enable rainbow mode

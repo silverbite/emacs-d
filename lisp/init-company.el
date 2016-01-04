@@ -7,6 +7,7 @@
 (require 'eclim)
 (require 'eclimd)
 
+;; Dont automatically saves the current buffer
 (setq eclim-auto-save t)
 
 (setq eclimd-default-workspace "~/Documents/workspace") ;; Eclipse workspace

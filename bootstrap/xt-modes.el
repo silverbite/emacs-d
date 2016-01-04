@@ -11,6 +11,7 @@
 ;; Programming languages
 (require 'init-php)
 (require 'init-go)
+(require 'init-clojure)
 
 
 (provide 'xt-modes)

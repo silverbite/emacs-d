@@ -17,6 +17,9 @@
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
 
+;; Adding blade templates files
+(add-to-list 'auto-mode-alist '("\\.blade.php\\'" . web-mode))
+
 (setq web-mode-engines-alist
       '(("php"    . "\\.phtml\\'")
         ("blade"  . "\\.blade\\."))

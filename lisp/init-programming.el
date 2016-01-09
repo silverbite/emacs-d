@@ -75,6 +75,8 @@
 ;; (setq magit-default-tracking-name-function #'magit-default-tracking-name-branch-only)
 ;; (setq magit-last-seen-setup-instructions "1.4.0")
 
+;; Put signoff message on commits
+(setq magit-commit-signoff t)
 
 ;; https://github.com/syohex/emacs-git-gutter
 (require-package 'git-gutter)
@@ -82,6 +84,23 @@
 
 ;; If you want to use git-gutter for files in git repository.
 (global-git-gutter-mode +1)
+
+;;------------------------------------------------------------------------------
+;; Flycheck related
+;;------------------------------------------------------------------------------
+;; https://github.com/flycheck/flycheck
+(require-package 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+
+;;------------------------------------------------------------------------------
+;; Flycheck related
+;;------------------------------------------------------------------------------
+;; https://github.com/purcell/emacs.d/blob/41387d200fd496d9a96dd8dd0ee34e8b60e14555/lisp/init-editing-utils.el 
+(require-package 'highlight-symbol)
+(dolist (hook '(prog-mode-hook html-mode-hook css-mode-hook))
+  (add-hook hook 'highlight-symbol-mode)
+  (add-hook hook 'highlight-symbol-nav-mode))
 
 
 (provide 'init-programming)

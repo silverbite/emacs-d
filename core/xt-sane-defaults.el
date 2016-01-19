@@ -531,9 +531,16 @@
 (eval-after-load "skewer-html" '(diminish 'skewer-html-mode))
 (eval-after-load "smartparens" '(diminish 'smartparens-mode))
 (eval-after-load "guide-key" '(diminish 'guide-key-mode))
-(eval-after-load "whitespace-cleanup-mode" '(diminish 'whitespace-cleanup-mode))
 (eval-after-load "subword" '(diminish 'subword-mode))
+(eval-after-load "whitespace-cleanup-mode" '(diminish 'whitespace-cleanup-mode))
 (eval-after-load "whitespace" '(diminish 'global-whitespace-mode))
+
+;; Added by xitkov
+(eval-after-load "ws-butler" '(diminish 'ws-butler-mode))
+(eval-after-load "highlight-symbol" '(diminish 'highlight-symbol-mode))
+(eval-after-load "git-gutter" '(diminish 'git-gutter-mode))
+(eval-after-load "helm" '(diminish 'helm-mode))
+(eval-after-load "projectile" '(diminish 'projectile-mode))
 
 
 ;; Start with frame maximized

@@ -92,6 +92,11 @@
 (require-package 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+;; Flycheck pos tip
+;; (require-package 'flycheck-pos-tip)
+;; (with-eval-after-load 'flycheck
+;;  (flycheck-pos-tip-mode))
+
 ;;phpcs settings
 ;; (setq flycheck-php-phpcs-executable "/usr/local/bin/phpcs")
 (setq flycheck-phpcs-standard (expand-file-name "~/.emacs.d/misc/lint/php/phpcs.xml"))

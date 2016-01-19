@@ -23,7 +23,7 @@
 ;; Bootstrap
 ;;----------------------------------------------------------------------------
 
-(add-to-list 'load-path (expand-file-name "bootstrap" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "core" user-emacs-directory))
 (require 'xt-utils)                     ;; Utilities
 (require 'xt-melpa)                     ;; Machinery for installing required packages
 (require 'xt-env-vars)                  ;; Set up $PATH and env
@@ -36,8 +36,10 @@
 ;;----------------------------------------------------------------------------
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lisp/modes" user-emacs-directory))
+
 (require 'xt-packages)
-;; (require 'xt-modes)
+(require 'xt-modes)
 
 
 ;;----------------------------------------------------------------------------

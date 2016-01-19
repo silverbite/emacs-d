@@ -2,16 +2,15 @@
 ;; Support Major File modes
 ;;------------------------------------------------------------------------------
 
-;; Markup modes
+(require 'init-clojure)
+(require 'init-go)
+(require 'init-haml)
+(require 'init-js)
 (require 'init-markdown)
 (require 'init-nxml)
-(require 'init-haml)
-(require 'init-web)
-
-;; Programming languages
+(require 'init-org)
 (require 'init-php)
-(require 'init-go)
-(require 'init-clojure)
+(require 'init-web)
 
 
 (provide 'xt-modes)

@@ -61,6 +61,9 @@
 (require 'company-web-jade)                          ; load company mode jade backend
 (require 'company-web-slim)                          ; load company mode slim backend
 
+(require-package 'company-go)
+(require 'company-go)
+
 ;; Add gtags
 ;; (add-to-list 'company-backends 'company-gtags)
 

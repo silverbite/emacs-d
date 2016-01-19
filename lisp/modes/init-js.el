@@ -13,6 +13,8 @@
 (setq-default js-auto-indent-flag nil
               js-indent-level 2)
 
+;; (setq inferior-js-program-command "node")
+
 (require-package 'tern)
 (require 'tern)
 

@@ -11,7 +11,14 @@
 (require-package 'helm)
 (require 'helm)
 (require 'helm-config)
+(require 'helm-ring)
+(require 'helm-misc)
+(require 'helm-buffers)
+(require 'helm-files)
+(require 'helm-locate)
+(require 'helm-bookmark)
 
+(require-package 'helm-swoop)
 (require-package 'helm-ag)
 
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
@@ -103,5 +110,13 @@
 ;; Toggle the perspective mode
 ;; (persp-mode)
 
+;;; Whitespace butler
+(require-package 'ws-butler)
 
+(add-hook 'php-mode-hook 'ws-butler-mode)
+(add-hook 'c-mode-common-hook 'ws-butler-mode)
+(add-hook 'python-mode-hook 'ws-butler-mode)
+(add-hook 'cython-mode-hook 'ws-butler-mode)
+
+  
 (provide 'init-project)

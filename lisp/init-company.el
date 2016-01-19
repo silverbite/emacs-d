@@ -8,7 +8,8 @@
 (require 'eclimd)
 
 ;; Dont automatically saves the current buffer
-(setq eclim-auto-save t)
+;; (setq eclim-auto-save t)
+(setq eclim-auto-save nil)
 
 (setq eclimd-default-workspace "~/Documents/workspace") ;; Eclipse workspace
 
@@ -33,8 +34,12 @@
 (require-package 'company)
 (require 'company)
 
-;; I don't need ctags :)
+;; I don't need tags :)
+(delete 'company-etags company-backends)
 (delete 'company-ctags company-backends)
+(delete 'company-gtags company-backends)
+
+;; (setq company-etags-ignore-case t)
 
 ;; Python autocomplete
 (require-package 'company-anaconda)
@@ -56,6 +61,10 @@
 (require 'company-web-jade)                          ; load company mode jade backend
 (require 'company-web-slim)                          ; load company mode slim backend
 
+;; Add gtags
+;; (add-to-list 'company-backends 'company-gtags)
+
+
 ;; you may key bind, for example for web-mode:
 ;; (define-key web-mode-map (kbd "C-'") 'company-web-html)
 
@@ -73,11 +82,6 @@
 (require-package 'company-go)
 (add-to-list 'company-backends 'company-go)
 
-;; company-statistics
-;; company-tern
-;; company-try-hard
-
-
 (setq company-idle-delay 0.2)
 (setq company-minimum-prefix-length 1)
 (setq company-show-numbers nil)
@@ -85,19 +89,17 @@
 (setq company-tooltip-limit 20)
 
 ;; You can trim too long function signatures to the frame width.
-(setq company-tern-meta-as-single-line t)
+;; (setq company-tern-meta-as-single-line t)
 
 ;; If you doesn't like inline argument annotations appear with corresponding identifiers,
 ;; then you can to set up the company align option.
 (setq company-tooltip-align-annotations 't)
 
-
-(setq company-dabbrev-downcase nil)
-(setq company-dabbrev-ignore-case t)
-(setq company-dabbrev-code-ignore-case t)
-(setq company-dabbrev-code-everywhere t)
-
-(setq company-etags-ignore-case t)
+;;; Company dabbrev
+;; (setq company-dabbrev-downcase nil)
+;; (setq company-dabbrev-ignore-case t)
+;; (setq company-dabbrev-code-ignore-case t)
+;; (setq company-dabbrev-code-everywhere t)
 
 ;; (unless (face-attribute 'company-tooltip :background)
 ;;     (set-face-attribute 'company-tooltip nil :background "black" :foreground "gray40")
@@ -171,6 +173,14 @@
 
 (require 'company-emacs-eclim)
 (company-emacs-eclim-setup)
+
+;; Helm interface for company
+;; Not working :(
+;; (require-package 'helm-company)
+
+;; (define-key company-mode-map (kbd "C-:") 'helm-company)
+;; (define-key company-active-map (kbd "C-:") 'helm-company)
+
 
 (global-company-mode t)
 

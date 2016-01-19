@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!-- Source :: https://github.com/maximlevitan/kohana-coding-standards/blob/master/PHP/CodeSniffer/Standards/Kohana/ruleset.xml -->
+<ruleset name="Kohana">
+    <description>The Kohana coding standard + PSR2.</description>
+
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+
+    <!-- Use Unix newlines -->
+    <rule ref="Generic.Files.LineEndings">
+        <properties>
+            <property name="eolChar" value="\n"/>
+        </properties>
+    </rule>
+    <!-- PHP code MUST use only UTF-8 without BOM. -->
+    <rule ref="Generic.Files.ByteOrderMark"/>
+
+    <!-- Ignore warnings on php files without php code -->
+    <rule ref="Internal.NoCodeFound">
+        <severity>0</severity>
+    </rule>
+
+    <!-- Include some specific generic sniffs -->
+    <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+    <!--
+        <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+    -->
+    <!-- Class constants MUST be declared in all upper case with underscore separators. -->
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+
+    <!-- When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis, there MUST NOT be a space after the opening parenthesis, and there MUST NOT be a space before the closing parenthesis. In the argument list, there MUST NOT be a space before each comma, and there MUST be one space after each comma.
+    Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line. -->
+    <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+
+    <!-- Copied from -->
+    <!-- https://github.com/RickyYudianto/laravel-phing/blob/master/build/laravel-phpcs.xml -->
+    <rule ref="Generic.Classes.DuplicateClassName"></rule>
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"></rule>
+    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"></rule>
+    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"></rule>
+    <rule ref="Generic.CodeAnalysis.JumbledIncrementer"></rule>
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"></rule>
+    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"></rule>
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"></rule>
+    <rule ref="Generic.Files.OneClassPerFile"></rule>
+    <rule ref="Generic.Strings.UnnecessaryStringConcat"></rule>
+    <rule ref="PSR1.Files.SideEffects"></rule>
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+      <severity>0</severity>
+    </rule>
+    
+    <!-- There MUST NOT be trailing whitespace at the end of non-blank lines. -->
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+        <properties>
+            <property name="ignoreBlankLines" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines">
+        <severity>0</severity>
+    </rule>
+    <!-- Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line. When the argument list is split across multiple lines, the closing parenthesis and opening brace MUST be placed together on their own line with one space between them. -->
+    <!-- <rule ref="Squiz.Functions.MultiLineFunctionDeclaration"/> -->
+    <!-- Visibility MUST be declared on all methods. -->
+    <rule ref="Squiz.Scope.MethodScope"/>
+    <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
+    <!-- Method names MUST NOT be declared with a space after the method name. The opening brace MUST go on its own line, and the closing brace MUST go on the next line following the body. There     MUST NOT be a space after the opening parenthesis, and there MUST NOT be a space before the closing parenthesis. -->
+    <rule ref="Squiz.Functions.FunctionDeclaration"/>
+    <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
+    <!-- In the argument list, there MUST NOT be a space before each comma, and there MUST be one space after each comma. -->
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <properties>
+            <property name="equalsSpacing" value="1"/>
+        </properties>
+    </rule>
+
+    <!-- The keyword elseif SHOULD be used instead of else if so that all control keywords look like single words. -->
+    <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
+
+    <!-- Method arguments with default values MUST go at the end of the argument list. -->
+    <rule ref="PEAR.Functions.ValidDefaultValue"/>
+</ruleset>

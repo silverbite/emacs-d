@@ -92,12 +92,24 @@
 (require-package 'flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+;;phpcs settings
+;; (setq flycheck-php-phpcs-executable "/usr/local/bin/phpcs")
+(setq flycheck-phpcs-standard (expand-file-name "~/.emacs.d/misc/lint/php/phpcs.xml"))
+
+;;phpmd settings
+;; (setq flycheck-php-phpmd-executable "/usr/local/bin/phpmd")
+(setq flycheck-phpmd-rulesets '())
+(add-to-list 'flycheck-phpmd-rulesets (expand-file-name "~/.emacs.d/misc/lint/php/phpmd.xml"))
+
 
 ;;------------------------------------------------------------------------------
-;; Flycheck related
+;; Other
 ;;------------------------------------------------------------------------------
+
+;;; highlight symbol
 ;; https://github.com/purcell/emacs.d/blob/41387d200fd496d9a96dd8dd0ee34e8b60e14555/lisp/init-editing-utils.el 
 (require-package 'highlight-symbol)
+
 (dolist (hook '(prog-mode-hook html-mode-hook css-mode-hook))
   (add-hook hook 'highlight-symbol-mode)
   (add-hook hook 'highlight-symbol-nav-mode))

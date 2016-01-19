@@ -199,4 +199,9 @@ Version 2015-12-02"
          (message "Directory path copied: 「%s」" (file-name-directory fpath))
          (file-name-directory fpath))))))
 
+;; TODO:: Move it 
+(defun xt/delete-tern-process ()
+  (interactive)
+  (delete-process "Tern"))
+
 (provide 'xt-utils)

@@ -26,7 +26,6 @@
 
 (global-eclim-mode)
 
-
 ;;------------------------------------------------------------------------------
 ;; Company mode
 ;;------------------------------------------------------------------------------
@@ -66,7 +65,6 @@
 
 ;; Add gtags
 ;; (add-to-list 'company-backends 'company-gtags)
-
 
 ;; you may key bind, for example for web-mode:
 ;; (define-key web-mode-map (kbd "C-'") 'company-web-html)

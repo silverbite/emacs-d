@@ -415,8 +415,10 @@
   (set-face-font 'default "Monospace-10"))
 
 (require-package 'noctilux-theme)
-;; Noctilus Theme
-(load-theme 'noctilux t)
+(require-package 'zenburn-theme)
+(require-package 'solarized-theme)
+
+(load-theme 'solarized-dark t)
 
 
 ;;------------------------------------------------------------------------------
@@ -499,7 +501,7 @@
 (set-default 'indicate-empty-lines t)
 (setq show-trailing-whitespace t)
 
-(paredit-mode 1)
+;; (paredit-mode 1)
 (eldoc-mode 1)
 
 (setq eldoc-idle-delay 0.3)
@@ -545,6 +547,37 @@
 
 ;; Start with frame maximized
 ;; (toggle-frame-maximized)
+
+
+;;------------------------------------------------------------------------------
+;; God mode
+;;------------------------------------------------------------------------------
+;; https://github.com/chrisdone/god-mode
+
+(require-package 'god-mode)
+
+(global-set-key (kbd "<escape>") 'god-local-mode)
+
+;; (global-set-key (kbd "<escape>") 'god-mode-all)
+;; (setq god-exempt-major-modes nil)
+;; (setq god-exempt-predicates nil)
+
+
+;;------------------------------------------------------------------------------
+;; Avy mode
+;;------------------------------------------------------------------------------
+;; https://github.com/abo-abo/avy
+
+(require-package 'avy)
+
+(avy-setup-default)
+
+(global-set-key (kbd "C-;") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+;; (global-set-key (kbd "M-g g") 'avy-goto-line) ; Can replace M-g g
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(global-set-key (kbd "M-g e") 'avy-goto-word-0)
 
 
 (provide 'xt-sane-defaults)

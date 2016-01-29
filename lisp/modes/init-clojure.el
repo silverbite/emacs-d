@@ -32,7 +32,8 @@
 
 ;; (add-hook 'clojure-mode-hook #'setup-clojure-buffer)
 ;; (add-hook 'cider-mode-hook #'cider-turn-on-eldoc-mode)
-(add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
+;; (add-hook 'clojure-mode-hook 'rainbow-identifiers-mode)
+;; (add-hook 'clojure-mode-hook #'rainbow-delimiters-mode)
 
 ;; (cljr-add-keybindings-with-prefix "C-c C-r")
 

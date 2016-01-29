@@ -17,11 +17,15 @@
         try-expand-dabbrev-all-buffers
         try-expand-dabbrev-from-kill))
 
+;;; Rainbow Delimiters
+(require-package 'rainbow-identifiers)
+
 ;;; Rainbow delimiters
 (require-package 'rainbow-delimiters)
 
-;; Elisp
-(add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+;; (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 
 ;; No more :(
 ;; (global-rainbow-delimiters-mode)
@@ -52,6 +56,8 @@
 ;;;https://github.com/Fuco1/smartparens
 (require-package 'smartparens)
 (require 'smartparens-config)
+
+(add-hook 'prog-mode-hook #'smartparens-mode)
 
 ;; Expand region
 ;;; https://github.com/atlefren/.emacs.d/blob/master/lisp/init-expand-region.el

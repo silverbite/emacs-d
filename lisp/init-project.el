@@ -99,6 +99,10 @@
 ;; (setq projectile-switch-project-action 'helm-projectile-find-file)
 (setq projectile-switch-project-action 'helm-projectile)
 
+;; Tramp mode is much slower than using terminal to ssh
+;; http://emacs.stackexchange.com/a/17579
+(setq projectile-mode-line "Projectile")
+
 
 ;;------------------------------------------------------------------------------
 ;; Perspective
@@ -113,10 +117,7 @@
 ;;; Whitespace butler
 (require-package 'ws-butler)
 
-(add-hook 'php-mode-hook 'ws-butler-mode)
-(add-hook 'c-mode-common-hook 'ws-butler-mode)
-(add-hook 'python-mode-hook 'ws-butler-mode)
-(add-hook 'cython-mode-hook 'ws-butler-mode)
+(add-hook 'prog-mode-hook 'ws-butler-mode)
 
-  
+
 (provide 'init-project)

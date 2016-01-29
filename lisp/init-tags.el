@@ -27,4 +27,11 @@
      (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
      (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
 
+(defun xt/php-only-update-hooks ()
+    (when (equal major-mode 'php-mode)
+        (helm-gtags-update-tags)))
+
+;; (remove-hook 'after-save-hook 'helm-gtags-update-tags)
+(add-hook 'after-save-hook 'xt/php-only-update-hooks)
+
 (provide 'init-tags)

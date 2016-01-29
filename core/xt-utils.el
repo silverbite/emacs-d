@@ -1,3 +1,6 @@
+;;----------------------------------------------------------------------------
+;; I don't know what it does :/
+;;----------------------------------------------------------------------------
 (if (fboundp 'with-eval-after-load)
     (defalias 'after-load 'with-eval-after-load)
   (defmacro after-load (feature &rest body)
@@ -199,9 +202,31 @@ Version 2015-12-02"
          (message "Directory path copied: 「%s」" (file-name-directory fpath))
          (file-name-directory fpath))))))
 
-;; TODO:: Move it 
+;;----------------------------------------------------------------------------
+;; JS Tern related
+;;----------------------------------------------------------------------------
 (defun xt/delete-tern-process ()
   (interactive)
   (delete-process "Tern"))
+
+;;----------------------------------------------------------------------------
+;; GNU GLOBAL related
+;;----------------------------------------------------------------------------
+(defun xt/gtags-root-dir ()
+  "Returns GTAGS root directory or nil if doesn't exist."
+  (with-temp-buffer
+    (if (zerop (call-process "global" nil t nil "-pr"))
+        (buffer-substring (point-min) (1- (point-max)))
+      nil)))
+
+(defun xt/gtags-update ()
+  "Make GTAGS incremental update"
+  (call-process "global" nil nil nil "-u"))
+
+(defun xt/gtags-update-hook ()
+  (when (gtags-root-dir)
+    (gtags-update)))
+
+;; (add-hook 'after-save-hook #'xt/gtags-update-hook)
 
 (provide 'xt-utils)

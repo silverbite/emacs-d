@@ -10,6 +10,7 @@
 (require 'init-nxml)
 (require 'init-org)
 (require 'init-php)
+(require 'init-ruby)
 (require 'init-web)
 
 

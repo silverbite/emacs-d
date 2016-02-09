@@ -33,3 +33,5 @@ GRTAGS
 
 .edbi-ds-history
 .mc-lists.el
+
+url/*

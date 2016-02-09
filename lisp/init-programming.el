@@ -3,6 +3,10 @@
 ;;------------------------------------------------------------------------------
 ;;
 
+;; http://www.emacswiki.org/emacs/IndentingC
+(setq c-default-style "linux"
+      c-basic-offset 0)
+
 ;;; show the name of the current function definition in the modeline
 (require 'which-func)
 (which-function-mode 1)
@@ -124,6 +128,14 @@
 (dolist (hook '(prog-mode-hook html-mode-hook css-mode-hook))
   (add-hook hook 'highlight-symbol-mode)
   (add-hook hook 'highlight-symbol-nav-mode))
+
+
+;;------------------------------------------------------------------------------
+;; Restclient
+;;------------------------------------------------------------------------------
+;; https://github.com/pashky/restclient.el
+
+(require-package 'restclient)
 
 
 (provide 'init-programming)

@@ -24,7 +24,7 @@
     <rule ref="Generic.Files.LineLength">
       <properties>
         <!-- Lines longer than this value will raising a warning-->
-        <property name="lineLimit" value="120"/>
+        <property name="lineLimit" value="160"/>
         <!-- Lines longer than this value will raising an error-->
         <property name="absoluteLineLimit" value="200"/>
       </properties>
@@ -167,11 +167,12 @@
     
     <!-- Protected and private functions must start with an underscore.
          Public functions may not start with an underscore. -->
-    <rule ref="PEAR.NamingConventions.ValidFunctionName"/>
+    <!-- Cries for camelCase in public function names -->
+    <!-- <rule ref="PEAR.NamingConventions.ValidFunctionName"/> -->
 
     <!-- Private members must have an underscore in front, public
          members must not.-->
-    <rule ref="PEAR.NamingConventions.ValidVariableName"/>
+    <!-- <rule ref="PEAR.NamingConventions.ValidVariableName"/> -->
 
     
     <!-- Each class must be in a file by itself and must be in a
@@ -363,7 +364,7 @@
     <rule ref="Squiz.PHP.DisallowComparisonAssignment"/>
 
     <!-- Ensures no inline if statements are used -->
-    <rule ref="Squiz.PHP.DisallowInlineIf"/>
+    <!-- <rule ref="Squiz.PHP.DisallowInlineIf"/> -->
     
     <!-- Ensures that there is only one value assignment on a line,
          and that it is the first thing on the line. -->
@@ -515,11 +516,12 @@
 
     <!-- Ensures that there is one blank lines between each member
          declaration-->
-    <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
+    <!-- Can enable later -->
+    <!-- <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/> -->
 
     <!-- Ensures there is no whitespace before a
          ObjectOperator ( -> )-->
-    <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing"/>
+    <!-- <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing"/> -->
     
     <!-- Ensures that operators have one space surrounding them.-->
     <rule ref="Squiz.WhiteSpace.OperatorSpacing"/>

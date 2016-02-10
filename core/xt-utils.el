@@ -229,4 +229,15 @@ Version 2015-12-02"
 
 ;; (add-hook 'after-save-hook #'xt/gtags-update-hook)
 
+
+;;----------------------------------------------------------------------------
+;; PHP related
+;;----------------------------------------------------------------------------
+
+(defun xt/php-cs-fix ()
+  (interactive)
+  (progn (shell-command (concat "php-cs-fixer fix " (buffer-file-name) " -v"))
+     (revert-buffer nil t)))
+
+
 (provide 'xt-utils)

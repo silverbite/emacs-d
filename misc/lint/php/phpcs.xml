@@ -4,65 +4,16 @@
   
     <description>Xitkov's Coding standard.</description>
 
-    <!-- A class or interface must not be defined in multiple files. -->
-    <rule ref="Generic.Classes.DuplicateClassName"></rule>
-
-    <!-- Only one class per file. -->
-    <rule ref="Generic.Files.OneClassPerFile"></rule>
-
-    <!-- Statements may not have an empty body. -->
-    <rule ref="Generic.CodeAnalysis.EmptyStatement"></rule>
-
-    <!-- All 'for' loops that could be simplified to a 'while' loop must be simplified. -->
-    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"></rule>
-
-    <!-- For loops test expressions may not have function calls in them. -->
-    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"></rule>
-
-    <!-- Reports cases where incrementer jumbling might happen in 'for' loops. -->
-    <rule ref="Generic.CodeAnalysis.JumbledIncrementer"></rule>
-
-    <!-- If- and elseif-statements may not be unconditional. -->
-    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"></rule>
-
-    <!-- No unnecessary final modifiers inside of final classes. -->
-    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"></rule>
-
-    <!-- No unused function parameters are allowed. -->
-    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"></rule>
-
-
-
-    <!-- There may not be any 'TODO' comments -->
-    <rule ref="Generic.Commenting.Todo"/>
-
-    <!-- There may not be any 'FIXME' comments-->
-    <rule ref="Generic.Commenting.Fixme"/>
-
     
-
-    <!-- Inline control structures like 'if($a) continue;' are not allowed -->
-    <rule ref="Generic.ControlStructures.InlineControlStructure"/>
-    
-
-    
-    <!-- Javascript related checking options. Show in general not be needed for phpcs. The named tools have to be installed for these sniffs to work.   -->
-
-    <!-- Runs 'gjslint' on your javascript files. -->
-    <rule ref="Generic.Debug.ClosureLinter"/>
-
-    <!-- Runs 'jshint' on your javascript files. -->
-    <rule ref="Generic.Debug.JSHint"/>
-
-    <!-- Runs 'csslint' on your css files. -->
-    <rule ref="Generic.Debug.CSSLint"/>
-
-
-
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--                     General settings                        -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+            
     <!-- PHP code MUST use only UTF-8 without BOM. -->
     <rule ref="Generic.Files.ByteOrderMark"/>
 
-    <!-- Line endings must be $eolChar. Defaults to making sure that everything has UNIX line endings. -->
+    <!-- Line endings must be $eolChar. Defaults to making sure that
+         everything has UNIX line endings. -->
     <rule ref="Generic.Files.LineEndings">
         <properties>
             <property name="eolChar" value="\n"/>
@@ -75,16 +26,33 @@
         <!-- Lines longer than this value will raising a warning-->
         <property name="lineLimit" value="120"/>
         <!-- Lines longer than this value will raising an error-->
-        <property name="absoluteLineLimit" value="160"/>
+        <property name="absoluteLineLimit" value="200"/>
       </properties>
     </rule>
 
+    <!-- Ensures the file ends with a newline character -->
+    <rule ref="PSR2.Files.EndFileNewline"/>
+
+    <!-- Enforces class and interfaces to be in ".inc" files while
+         everything else should go into ".php" files. -->
+    <!-- <rule ref="Squiz.Files.FileExtension"/> -->
 
     
+    
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--                       Coding Style                          -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    
+    <!-- Inline control structures like 'if($a) continue;'
+         are not allowed -->
+    <rule ref="Generic.ControlStructures.InlineControlStructure"/>
+
     <!-- There must be only on statement per line. -->
     <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
 
-    <!-- If there are multiple adjacent assignments, the equals signs of each assignment have to be aligned. -->
+    <!-- If there are multiple adjacent assignments, the equals
+         signs of each assignment have to be aligned. -->
     <rule ref="Generic.Formatting.MultipleStatementAlignment">
       <properties>
         <property name="error" value="true"/>
@@ -93,73 +61,45 @@
     </properties>
     </rule>
 
-    <!-- Whether to have a space or not after cast -->
-    <!-- <rule ref="Generic.Formatting.NoSpaceAfterCast"/> -->
-    <rule ref="Generic.Formatting.SpaceAfterCast"/>
-
-
-    
-    <!-- Disallows usage of call-time pass-by-reference. See: http://php.net/manual/en/language.references.pass.php -->
-    <rule ref="Generic.Functions.CallTimePassByReference"/>
-
-    <!-- When making a method or function call, there MUST NOT be a space between the method or function name and the opening parenthesis, there MUST NOT be a space after the opening parenthesis, and there MUST NOT be a space before the closing parenthesis. In the argument list, there MUST NOT be a space before each comma, and there MUST be one space after each comma.
-         Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line. -->
+    <!-- When making a method or function call, there MUST NOT be a
+         space between the method or function name and the opening
+         parenthesis, there MUST NOT be a space after the opening
+         parenthesis, and there MUST NOT be a space before the
+         closing parenthesis. In the argument list, there MUST NOT
+         be a space before each comma, and there MUST be one space
+         after each comma. -->
+    <!-- Argument lists MAY be split across multiple lines,
+         where each subsequent line is indented once. When doing so,
+         the first item in the list MUST be on the next line,
+         and there MUST be only one argument per line. -->
     <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
 
-    <!-- Function declarations must follow the "BSD/Allman style". The function brace is on the line following the function declaration and is indented to the same column as the start of the function declaration. -->
-    <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
-    <!--  Function declarations follow the "Kernighan/Ritchie style". The function brace is on the same line as the function declaration. One space is required between the closing parenthesis and the brace.  -->
+    <!-- Function declarations must follow the "BSD/Allman style".
+         The function brace is on the line following the function
+         declaration and is indented to the same column as the
+         start of the function declaration. -->
+    <!-- <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/> -->
+    <!--  Function declarations follow the "Kernighan/Ritchie style".
+         The function brace is on the same line as the function
+         declaration. One space is required between the closing
+         parenthesis and the brace.  -->
     <!-- <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/> -->
 
-
-
-    <!-- Disallows to complex function determined by the cyclomatic complexity (McCabe, http://en.wikipedia.org/wiki/Cyclomatic_complexity) of that function. If $absoluteComplexity has the same value as $complexity then there will be only errors and no warnings. -->
-    <rule ref="Generic.Metrics.CyclomaticComplexity">
-    <properties>
-      <property name="complexity" value="10"/>
-        <property name="absoluteComplexity" value="20"/>
-    </properties>
-    </rule>
-
-    <!-- Defines a maximum $nestingLevel and $absoluteNestingLevel for functions. If $nestingLevel has the same value as $absoluteNestingLevel then there will be only errors and no warnings. -->
-    <rule ref="Generic.Metrics.NestingLevel">
-    <properties>
-        <property name="nestingLevel" value="5"/>
-        <property name="absoluteNestingLevel" value="10"/>
-    </properties>
-    </rule>
-
-
-    
     <!-- Disallows usage of PHP 4 style constructors -->
-    <rule ref="Generic.NamingConventions.ConstructorName">
+    <!-- <rule ref="Generic.NamingConventions.ConstructorName">
       <properties>
         <property name="error" value="true"/>
       </properties>
-    </rule>
+    </rule> -->
+      
 
     <!-- Constants must be uppercase -->
     <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
 
-    <!-- <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/> -->
     <!-- <rule ref="Generic.NamingConventions.CamelCapsFunctionName"/> -->
 
-
-
-    <!-- Disallows the use of any deprecated functions -->
-    <rule ref="Generic.PHP.DeprecatedFunctions"/>
-
-    <!-- Makes sure that shorthand PHP open tags are not used. -->
-    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
-
-    <!-- Disallows the use of alias functions that are kept in PHP for compatibility with older versions. Can be used to forbid the use of any function when creating your own Sniff class extending from this class. -->
-    <rule ref="Generic.PHP.ForbiddenFunctions">
-      <properties>
-        <property name="error" value="true"/>
-      </properties>
-    </rule>
-
-    <!-- The constants 'true', 'false' or 'null' must be written in lowercase. -->
+    <!-- The constants 'true', 'false' or 'null' must be written
+         in lowercase. -->
     <!-- <rule ref="Generic.PHP.LowerCaseConstant"/> -->
     <rule ref="Generic.PHP.UpperCaseConstant"/>
 
@@ -169,167 +109,98 @@
         <property name="error" value="false"/>
       </properties>
     </rule>
-
-
-
     
-    <!-- Strings must not be concatenated when they could be written as one string. -->
+    <!-- Strings must not be concatenated when they could be written
+         as one string. -->
     <rule ref="Generic.Strings.UnnecessaryStringConcat">
       <properties>
         <property name="error" value="false"/>
       </properties>
     </rule>
 
-
-
-    
-    <!-- Spaces, not tabs, must be used for indentation. -->
-    <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
-    <!-- <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/> -->
-
-    <!-- Checks that control structures are structured correctly and their content is indented correctly. This sniff will throw errors if tabs are used for indentation rather than spaces. -->
-    <rule ref="Generic.WhiteSpace.ScopeIndent">
-      <properties>
-        <!-- The number of spaces code should be indented. -->
-        <property name="indent" value="5"/>
-        <!-- Does the indent need to be exactly right? If TRUE, indent needs to be exactly -->
-        <property name="exact" value="true"/>
-      </properties>
-    </rule>
-
+    <!-- Makes sure that shorthand PHP open tags are not used. -->
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
 
     
-    <!-- Ensures that eval() is not used to create objects. -->
-    <rule ref="MySource.PHP.EvalObjectFactory"/>
+    <!-- Closing parenthesis of a multi-line IF statement must be on
+         a new line, each line must begin with a boolean operator
+         and there must be a single space between the closing
+         parenthesis and the opening brace. -->
+    <!-- <rule ref="PEAR.ControlStructures.MultiLineCondition"/> -->
 
-    <!-- Disallows the direct usage of $_REQUEST, $_GET, $_POST and $_FILES. It's only allowed in a class called "Security" in a function called "getRequestData". The Sniff is very specific and not useful in general but it can be used as template sniff for your own take on it. If you are using a request object instantiated in your bootstrap or a external lib then this sniff will also work for you. -->
-    <rule ref="MySource.PHP.GetRequestData"/>
-
-    <!-- Warns when function values are returned directly. The Sniff enforces that the result of a function call should be assigned to a variable before being returned.-->
-    <!-- <rule ref="MySource.PHP.ReturnFunctionValue"/> -->
-
-    <!-- Functions with an @api annotation may not make null comparisons but have to use empty() -->
-    <!-- <rule ref="MySource.PHP.AjaxNullComparison"/> -->
-
-
-    <!-- Classes must have their opening brace on a new line and must indeted by $indent spaces. http://pear.php.net/manual/en/standards.classdef.php-->
-    <!-- <rule ref="PEAR.Classes.ClassDeclaration">
-      <properties>
-        <property name="indent" value="4"/>
-      </properties>
-      </rule> -->
-
-    <!-- Enforces class comments and their format. For a detailed rule description check the example section. -->
-    <!-- <rule ref="PEAR.Commenting.ClassComment"/> -->
-
-    <!-- Enforces file comments and their format. For a detailed rule description check the example section. -->
-    <!-- <rule ref="PEAR.Commenting.FileComment"/> -->
-
-    <!-- Enforces function comments and their format. For a detailed rule description check the example section. -->
-    <!-- <rule ref="PEAR.Commenting.FunctionComment"/> -->
-
-    <!-- Checks that no perl-style comments (#) are used. -->
-    <rule ref="PEAR.Commenting.InlineComment"/>
-
-    <!-- Enforces show control signatures are spaced. See the examples. Also a great base class to easily specify ow you want your own signatures to be spaced. -->
+    <!-- Enforces show control signatures are spaced.  -->
     <!-- <rule ref="PEAR.ControlStructures.ControlSignature">
       <properties>
         <property name="ignoreComments" value="false"/>
       </properties>
     </rule> -->
 
-    <!-- Closing parenthesis of a multi-line IF statement must be on a new line, each line must begin with a boolean operator and there must be a single space between the closing parenthesis and the opening brace. -->
-    <rule ref="PEAR.ControlStructures.MultiLineCondition"/>
-    
-    <!-- Checks that the include_once is used in conditional situations, and require_once is used elsewhere. Also checks that brackets do not surround the file being included. -->
-    <!-- <rule ref="PEAR.Files.IncludingFile"/> -->
 
-    <!-- Assignment that spawn two lines must have their equal sign indented and on the new line -->
+    <!--                    Commenting                       -->
+    
+    <!-- Enforces class comments and their format. -->
+    <!-- <rule ref="PEAR.Commenting.ClassComment"/> -->
+
+    <!-- Enforces file comments and their format. -->
+    <!-- <rule ref="PEAR.Commenting.FileComment"/> -->
+
+    <!-- Enforces function comments and their format. -->
+    <!-- <rule ref="PEAR.Commenting.FunctionComment"/> -->
+
+    <!-- Checks that no perl-style comments (#) are used. -->
+    <rule ref="PEAR.Commenting.InlineComment"/>
+
+
+    
+    <!-- Assignment that spawn two lines must have their equal
+         sign indented and on the new line -->
     <rule ref="PEAR.Formatting.MultiLineAssignment"/>
-
-
-    <!-- Enforces function call signatures "foo($a, $b, $c)" style reporting all other whitespaces. -->
-    <rule ref="PEAR.Functions.FunctionCallSignature">
-      <properties>
-        <property name="indent" value="4"/>
-        <property name="allowMultipleArguments" value="true"/>
-      </properties>
-    </rule>
-
-    <!-- Enforces single and multi-line function declarations to defined correctly. Single line declarations follow the Generic BSD-Allman brace sniff. For multi line declarations see the example. -->
-    <rule ref="PEAR.Functions.FunctionDeclaration"/>
-
-    <!-- Ensure that parameters defined for a function that have a default value come at the end of the function signature. -->
-    <rule ref="PEAR.Functions.ValidDefaultValue"/>
-
-    <!-- Class and interface names must start with a capital letter for each part of the name, separated by underscores. -->
-    <rule ref="PEAR.NamingConventions.ValidClassName"/>
     
-    <!-- Protected and private functions must start with an underscore. Public functions may not start with an underscore. -->
+    <!-- Enforces single and multi-line function declarations
+         to defined correctly. Single line declarations follow
+         the Generic BSD-Allman brace sniff. -->
+    <rule ref="PEAR.Functions.FunctionDeclaration"/>
+    
+    <!-- Class and interface names must start with a capital letter
+         for each part of the name, separated by underscores. -->
+    <!-- <rule ref="PEAR.NamingConventions.ValidClassName"/> -->
+    
+    <!-- Protected and private functions must start with an underscore.
+         Public functions may not start with an underscore. -->
     <rule ref="PEAR.NamingConventions.ValidFunctionName"/>
 
-    <!-- Private members must have an underscore in front, public members must not.-->
+    <!-- Private members must have an underscore in front, public
+         members must not.-->
     <rule ref="PEAR.NamingConventions.ValidVariableName"/>
 
-    <!-- Object operators must be indented 4 spaces if they are the first thing on a line. -->
-    <rule ref="PEAR.WhiteSpace.ObjectOperatorIndent">
+    
+    <!-- Each class must be in a file by itself and must be in a
+         namespace of at least one level depth. -->
+    <!-- <rule ref="PSR1.Classes.ClassDeclaration"/> -->
+
+    
+    <!-- Check that the class declaration adheres to all PSR2 rules -->
+    <!-- <rule ref="PSR2.Classes.ClassDeclaration"/> -->
+
+    <!-- Check that the property declaration adheres to all PSR2 rules-->
+    <!-- <rule ref="PSR2.Classes.PropertyDeclaration"/> -->
+
+    <!-- Verifies that there are no else if statements. Elseif should
+         be used instead -->
+    <!-- <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/> -->
+
+    <!-- Ensures that switch statements are defined according to PSR2 -->
+    <!-- <rule ref="PSR2.ControlStructures.SwitchDeclaration">
       <properties>
         <property name="indent" value="4"/>
       </properties>
-    </rule>
-
-    <!-- Closing braces of scopes must be aligned correctly. See the example. -->
-    <rule ref="PEAR.WhiteSpace.ScopeClosingBrace">
-      <properties>
-        <property name="indent" value="5"/>
-      </properties>
-    </rule>
-
-    <!-- Checks that control structures are structured correctly, and their content is indented correctly. See the example for details.-->
-    <rule ref="PEAR.WhiteSpace.ScopeIndent"/>
-
-
-
-
-    
-    <!-- Each class must be in a file by itself and must be in a namespace of at least one level depth. -->
-    <rule ref="PSR1.Classes.ClassDeclaration"/>
-
-    <!-- Ensures a file declare new symbols and causes no other side effects, or executes logic with side effects, but not both.-->
-    <rule ref="PSR1.Files.SideEffects"></rule>
-
-    <!-- Missing namespace -->
-    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
-      <severity>0</severity>
-    </rule>
-
-
-    <!-- Check that the class declaration adheres to all PSR2 rules -->
-    <rule ref="PSR2.Classes.ClassDeclaration"/>
-
-    <!-- Check that the property declaration adheres to all PSR2 rules-->
-    <rule ref="PSR2.Classes.PropertyDeclaration"/>
-
+    </rule> -->
 
     <!-- Checks that control structures have PSR2 style spacing around brackets -->
     <rule ref="PSR2.ControlStructures.ControlStructureSpacing"/>
-    
-    <!-- Verifies that there are no else if statements. Elseif should be used instead -->
-    <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
-    
-    <!-- Ensures that switch statements are defined according to PSR2 -->
-    <rule ref="PSR2.ControlStructures.SwitchDeclaration">
-      <properties>
-        <property name="indent" value="5"/>
-      </properties>
-    </rule>
-
-    <!-- Ensures the file ends with a newline character -->
-    <rule ref="PSR2.Files.EndFileNewline"/>
 
     <!-- Check that the method declaration adheres to all PSR2 rules -->
-    <rule ref="PSR2.Methods.MethodDeclaration"/>
-
+    <!-- <rule ref="PSR2.Methods.MethodDeclaration"/> -->
 
     <!-- There must be one blank line after the namespace declaration -->
     <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
@@ -337,54 +208,198 @@
     <!-- Ensures USE blocks are declared according to PSR2-->
     <rule ref="PSR2.Namespaces.UseDeclaration"/>
 
-
-
     
-    <!-- Enforces class and interfaces to be in ".inc" files while everything else should go into ".php" files. -->
-    <!-- <rule ref="Squiz.Files.FileExtension"/> -->
+    <!-- Ensures an style for the indentation of embedded PHP
+         code segments.
+         - No empty embedded tags
+         - No blank lines after the opening tag of the embedded code
+         - No blank lines before the closing tag of the embedded code
+         - Opening tag must be on a new line by its self
+         - Closing tag must be on a line by itself
+         - Indenting inside the php tags -->
+    <rule ref="Squiz.PHP.EmbeddedPhp"/>
+    
+    <!-- Argument lists MAY be split across multiple lines, where each
+         subsequent line is indented once. When doing so, the first
+         item in the list MUST be on the next line, and there MUST be
+         only one argument per line. When the argument list is split
+         across multiple lines, the closing parenthesis and opening
+         brace MUST be placed together on their own line with one
+         space between them. -->
+    <!-- <rule ref="Squiz.Functions.MultiLineFunctionDeclaration"/> -->
+    
 
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--                       Code analysis                         -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    
+
+    <!--                    Code complexity                         -->
+    
+    <!-- Disallows to complex function determined by the cyclomatic
+         complexity (McCabe,
+         http://en.wikipedia.org/wiki/Cyclomatic_complexity) of that
+         function. If $absoluteComplexity has the same value as
+         $complexity then there will be only errors and no warnings. -->
+    <rule ref="Generic.Metrics.CyclomaticComplexity">
+    <properties>
+      <property name="complexity" value="10"/>
+        <property name="absoluteComplexity" value="20"/>
+    </properties>
+    </rule>
+
+    <!-- Defines a maximum $nestingLevel and $absoluteNestingLevel
+         for functions. If $nestingLevel has the same value as
+         $absoluteNestingLevel then there will be only errors
+         and no warnings. -->
+    <rule ref="Generic.Metrics.NestingLevel">
+    <properties>
+        <property name="nestingLevel" value="5"/>
+        <property name="absoluteNestingLevel" value="10"/>
+    </properties>
+    </rule>
+
+
+
+    <!-- A class or interface must not be defined in multiple files. -->
+    <rule ref="Generic.Classes.DuplicateClassName"></rule>
+
+    <!-- Only one class per file. -->
+    <rule ref="Generic.Files.OneClassPerFile"></rule>
+
+    <!-- Disallows usage of call-time pass-by-reference. See:
+         http://php.net/manual/en/language.references.pass.php -->
+    <rule ref="Generic.Functions.CallTimePassByReference"/>
+
+    <!-- Disallows the use of any deprecated functions -->
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+
+    <!-- Disallows the use of alias functions that are kept in PHP
+         for compatibility with older versions. Can be used to
+         forbid the use of any function when creating your own
+         Sniff class extending from this class. -->
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+      <properties>
+        <property name="error" value="true"/>
+      </properties>
+    </rule>
+
+    <!-- Statements may not have an empty body. -->
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"></rule>
+
+    <!-- All 'for' loops that could be simplified to a 'while'
+         loop must be simplified. -->
+    <rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop"></rule>
+
+    <!-- For loops test expressions may not have function calls
+         in them. -->
+    <rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall"></rule>
+
+    <!-- Reports cases where incrementer jumbling might happen in
+         'for' loops. -->
+    <rule ref="Generic.CodeAnalysis.JumbledIncrementer"></rule>
+
+    <!-- If- and elseif-statements may not be unconditional. -->
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"></rule>
+
+    <!-- No unnecessary final modifiers inside of final classes. -->
+    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"></rule>
+
+    <!-- No unused function parameters are allowed. -->
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"></rule>
+
+    <!-- No unnecessary overridden methods, that simply call their
+         parent, are allowed. -->
+    <rule ref="Generic.CodeAnalysis.UselessOverridingMethod"></rule>
+
+    <!-- There may not be any 'TODO' comments -->
+    <rule ref="Generic.Commenting.Todo"/>
+
+    <!-- There may not be any 'FIXME' comments-->
+    <rule ref="Generic.Commenting.Fixme"/>
+
+
+    <!-- Checks that the include_once is used in conditional
+         situations, and require_once is used elsewhere.
+         Also checks that brackets do not surround the file
+         being included. -->
+    <!-- <rule ref="PEAR.Files.IncludingFile"/> -->
+
+    <!-- Enforces function call signatures "foo($a, $b, $c)"
+         style reporting all other whitespaces. -->
+    <rule ref="PEAR.Functions.FunctionCallSignature">
+      <properties>
+        <property name="indent" value="4"/>
+        <property name="allowMultipleArguments" value="true"/>
+      </properties>
+    </rule>
+
+    <!-- Ensure that parameters defined for a function that have
+         a default value come at the end of the function
+         signature. -->
+    <rule ref="PEAR.Functions.ValidDefaultValue"/>
+
+    <!-- Ensures a file declare new symbols and causes no other
+         side effects, or executes logic with side effects,
+         but not both.-->
+    <rule ref="PSR1.Files.SideEffects"></rule>
+
+    <!-- Missing namespace -->
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+      <severity>0</severity>
+    </rule>
+    
     <!-- Try to ensure that there is no commented out code -->
     <rule ref="Squiz.PHP.CommentedOutCode">
       <properties>
-        <!-- If a comment is more than $value percent code, a warning will be shown. -->
+        <!-- If a comment is more than $value percent code, a warning
+             will be shown. -->
         <property name="maxPercentage" value="35"/>
       </properties>
     </rule>
 
-
-    <!-- Ensures that the value of a comparison is not assigned to a variable -->
+    <!-- Ensures that the value of a comparison is not assigned to
+         a variable -->
     <rule ref="Squiz.PHP.DisallowComparisonAssignment"/>
 
-    <!-- Ensures no inline if statements are used-->
-    <!-- <rule ref="Squiz.PHP.DisallowInlineIf"/> -->
+    <!-- Ensures no inline if statements are used -->
+    <rule ref="Squiz.PHP.DisallowInlineIf"/>
     
-
-    <!-- Ensures that there is only one value assignment on a line, and that it is the first thing on the line. -->
+    <!-- Ensures that there is only one value assignment on a line,
+         and that it is the first thing on the line. -->
     <rule ref="Squiz.PHP.DisallowMultipleAssignments"/>
 
-
-
-    <!-- Ensures that the ob_end_flush function is not used-->
+    <!-- Ensures that the ob_end_flush function is not used -->
     <rule ref="Squiz.PHP.DisallowObEndFlush"/>
 
-    <!-- Ensures no size-based functions are used in loop conditions to avoid unneccarry function calls-->
+    <!-- Ensures no size-based functions are used in loop
+         conditions to avoid unneccarry function calls -->
     <rule ref="Squiz.PHP.DisallowSizeFunctionsInLoops"/>
 
-    <!-- Ensures that there are no `error_log` and `print_r` function calls. The Sniff can be extended used to disallow any function-->
+    <!-- Ensures that there are no `error_log` and `print_r` function
+         calls. The Sniff can be extended used to disallow
+         any function -->
     <rule ref="Squiz.PHP.DiscouragedFunctions">
       <properties>
         <property name="error" value="false"/>
       </properties>
     </rule>
 
-    
-    <!-- Ensures an style for the indentation of embedded PHP code segments. - No empty embedded tags - No blank lines after the opening tag of the embedded code - No blank lines before the closing tag of the embedded code - Opening tag must be on a new line by its self - Closing tag must be on a line by itself - Indenting inside the php tags-->
-    <rule ref="Squiz.PHP.EmbeddedPhp"/>
-    
+    <!-- Warns about code that can never been executed. This happens
+         when a function returns before the code, or a break ends
+         execution of a statement etc.-->
+    <rule ref="Squiz.PHP.NonExecutableCode"/>
+
+    <!-- Ensures that there are no function definitions inside of
+         functions. Closure are ok.-->
+    <rule ref="Squiz.PHP.InnerFunctions"/>
+         
     <!-- Warns about usage for the eval() function-->
     <rule ref="Squiz.PHP.Eval"/>
     
-    <!-- Discourages the use of alias functions that are kept in PHP for compatibility with older versions. Can be subclassed to forbid the use of any function and suggest alternatives.-->
+    <!-- Discourages the use of alias functions that are kept in PHP
+         for compatibility with older versions. Can be subclassed
+         to forbid the use of any function and suggest alternatives. -->
     <rule ref="Squiz.PHP.ForbiddenFunctions"/>
     
     <!-- Ensures that the "global" keyword isn't used.-->
@@ -392,16 +407,17 @@
     
     <!-- Ensures that no Heredoc statements are used.-->
     <rule ref="Squiz.PHP.Heredoc"/>
-    
-    <!-- Ensures that there are no function definitions inside of functions. Closure are ok.-->
-    <rule ref="Squiz.PHP.InnerFunctions"/>
+
+    <!-- Method names MUST NOT be declared with a space after the
+         method name. The opening brace MUST go on its own line, and
+         the closing brace MUST go on the next line following the body.
+         There MUST NOT be a space after the opening parenthesis,
+         and there MUST NOT be a space before the closing parenthesis. -->
+    <!-- <rule ref="Squiz.Functions.FunctionDeclaration"/> -->
+    <!-- <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/> -->
     
     <!-- Ensures all calls to builtin PHP functions are lowercase.-->
     <rule ref="Squiz.PHP.LowercasePHPFunctions"/>
-    
-    <!-- Warns about code that can never been executed. This happens when a function returns before the code, or a break ends execution of a statement etc.-->
-    <rule ref="Squiz.PHP.NonExecutableCode"/>
-    
 
     <!-- Ensures that class members have scope modifiers-->
     <rule ref="Squiz.Scope.MemberVarScope"/>
@@ -409,47 +425,112 @@
     <!-- Ensures that methods have scope modifiers-->
     <rule ref="Squiz.Scope.MethodScope"/>
     
-    <!-- Ensures that $this is not used in static methods to avoid runtime errors-->
+    <!-- Ensures that $this is not used in static methods to avoid
+         runtime errors-->
     <rule ref="Squiz.Scope.StaticThisUsage"/>
 
+   
+
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--                     Whitespace related                      -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+    <!-- Spaces, not tabs, must be used for indentation. -->
+    <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+    <!-- <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/> -->
+
+    <!-- Checks that control structures are structured correctly
+         and their content is indented correctly. This sniff
+         will throw errors if tabs are used for indentation
+         rather than spaces. -->
+    <!-- <rule ref="Generic.WhiteSpace.ScopeIndent">
+      <properties>
+        <property name="indent" value="4"/>
+        <property name="exact" value="true"/>
+      </properties>
+    </rule> -->
+
+    <!-- Whether to have a space or not after cast -->
+    <!-- <rule ref="Generic.Formatting.NoSpaceAfterCast"/> -->
+    <!-- <rule ref="Generic.Formatting.SpaceAfterCast"/> -->
+
     
+    <!-- Object operators must be indented 4 spaces if they are the first thing on a line. -->
+    <rule ref="PEAR.WhiteSpace.ObjectOperatorIndent">
+      <properties>
+        <property name="indent" value="4"/>
+      </properties>
+    </rule>
+
+    <!-- Closing braces of scopes must be aligned correctly. -->
+    <rule ref="PEAR.WhiteSpace.ScopeClosingBrace">
+      <properties>
+        <property name="indent" value="4"/>
+      </properties>
+    </rule>
+
+    <!-- Checks that control structures are structured correctly,
+         and their content is indented correctly. -->
+    <rule ref="PEAR.WhiteSpace.ScopeIndent"/>
+
+       
+    <!-- In the argument list, there MUST NOT be a space before
+         each comma, and there MUST be one space after
+         each comma. -->
+    <!-- <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <properties>
+            <property name="equalsSpacing" value="1"/>
+        </properties>
+    </rule> -->
 
     <!-- Ensure cast statements dont contain whitespace.-->
     <rule ref="Squiz.WhiteSpace.CastSpacing"/>
-
-
     
-    <!-- Ensures that control structures have a certain style of spacing around brackets. For other spacing styles there is the possibility of extending PHP_CodeSniffer_Standards_AbstractPatternSniff.-->
+    <!-- Ensures that control structures have a certain style of
+         spacing around brackets. For other spacing styles there is
+         the possibility of extending
+         PHP_CodeSniffer_Standards_AbstractPatternSniff. -->
     <rule ref="Squiz.WhiteSpace.ControlStructureSpacing"/>
 
-    <!-- Checks that there is one empty line before the closing brace of a function but zero before the closing the brace of nested functions.-->
-    <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace"/>
+    <!-- Checks that there is one empty line before the closing brace
+         of a function but zero before the closing the brace of
+         nested functions.-->
+    <!-- <rule ref="Squiz.WhiteSpace.FunctionClosingBraceSpace"/> -->
 
-    <!-- Checks that there are no blank lines after a functions opening brace and that opening braces are on the new line.-->
+    <!-- Checks that there are no blank lines after a functions
+         opening brace and that opening braces are on the new line.-->
     <rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace"/>
 
-    <!-- Checks the separation between methods in a class or interface. Methods are expected to have two blank lines between them.-->
-    <rule ref="Squiz.WhiteSpace.FunctionSpacing"/>
+    <!-- Checks the separation between methods in a class or interface.
+         Methods are expected to have two blank lines between them.-->
+    <!-- <rule ref="Squiz.WhiteSpace.FunctionSpacing"/> -->
     
-    <!-- Ensures all language constructs (without brackets) contain a single space between themselves and their content.-->
+    <!-- Ensures all language constructs (without brackets) contain
+         a single space between themselves and their content.-->
     <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
 
-    <!-- Ensures that there is one space before and after a logical operator.-->
+    <!-- Ensures that there is one space before and after a logical
+         operator.-->
     <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
 
-    <!-- Ensures that there is one blank lines between each member declaration-->
+    <!-- Ensures that there is one blank lines between each member
+         declaration-->
     <rule ref="Squiz.WhiteSpace.MemberVarSpacing"/>
 
-    <!-- Ensures there is no whitespace before a ObjectOperator ( -> )-->
+    <!-- Ensures there is no whitespace before a
+         ObjectOperator ( -> )-->
     <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing"/>
     
     <!-- Ensures that operators have one space surrounding them.-->
     <rule ref="Squiz.WhiteSpace.OperatorSpacing"/>
     
-    <!-- Javascript: Ensures that the colon in a property or label definition has a single space after it and no space before it.-->
+    <!-- Javascript: Ensures that the colon in a property or label
+         definition has a single space after it and no space
+         before it.-->
     <rule ref="Squiz.WhiteSpace.PropertyLabelSpacing"/>
     
-    <!-- Ensures that the closing braces of scopes are on a new line and indented correctly.-->
+    <!-- Ensures that the closing braces of scopes are on a new line
+         and indented correctly.-->
     <rule ref="Squiz.WhiteSpace.ScopeClosingBrace"/>
 
     <!-- Ensure there is a single space after scope keywords.-->
@@ -458,8 +539,8 @@
     <!-- Ensures that there is no whitespace before a semicolon.-->
     <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
     
-
-    <!-- There MUST NOT be trailing whitespace at the end of non-blank lines. -->
+    <!-- There MUST NOT be trailing whitespace at the end of
+         non-blank lines. -->
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
       <properties>
         <property name="ignoreBlankLines" value="true"/>
@@ -475,19 +556,60 @@
       <severity>0</severity>
     </rule>
 
-
-    <!-- Argument lists MAY be split across multiple lines, where each subsequent line is indented once. When doing so, the first item in the list MUST be on the next line, and there MUST be only one argument per line. When the argument list is split across multiple lines, the closing parenthesis and opening brace MUST be placed together on their own line with one space between them. -->
-    <!-- <rule ref="Squiz.Functions.MultiLineFunctionDeclaration"/> -->
-
-    <!-- Method names MUST NOT be declared with a space after the method name. The opening brace MUST go on its own line, and the closing brace MUST go on the next line following the body. There     MUST NOT be a space after the opening parenthesis, and there MUST NOT be a space before the closing parenthesis. -->
-    <rule ref="Squiz.Functions.FunctionDeclaration"/>
-    <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
     
-    <!-- In the argument list, there MUST NOT be a space before each comma, and there MUST be one space after each comma. -->
-    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
-        <properties>
-            <property name="equalsSpacing" value="1"/>
-        </properties>
-    </rule>
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!-- Javascript related checking options. Show in general not be
+         needed for phpcs. The named tools have to be installed
+         for these sniffs to work.   -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    
+    <!-- Runs 'gjslint' on your javascript files. -->
+    <rule ref="Generic.Debug.ClosureLinter"/>
 
+    <!-- Runs 'jshint' on your javascript files. -->
+    <rule ref="Generic.Debug.JSHint"/>
+
+    <!-- Runs 'csslint' on your css files. -->
+    <rule ref="Generic.Debug.CSSLint"/>
+
+
+    
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    <!--                       UNUSED                                -->
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+    
+    <!-- Ensures that eval() is not used to create objects. -->
+    <!-- <rule ref="MySource.PHP.EvalObjectFactory"/> -->
+
+    <!-- Disallows the direct usage of $_REQUEST, $_GET, $_POST
+         and $_FILES. It's only allowed in a class called
+         "Security" in a function called "getRequestData".
+         The Sniff is very specific and not useful in general
+         but it can be used as template sniff for your own take
+         on it. If you are using a request object instantiated
+         in your bootstrap or a external lib then this sniff
+         will also work for you. -->
+    <!-- <rule ref="MySource.PHP.GetRequestData"/> -->
+
+    <!-- Warns when function values are returned directly.
+         The Sniff enforces that the result of a function
+         call should be assigned to a variable before
+         being returned.-->
+    <!-- <rule ref="MySource.PHP.ReturnFunctionValue"/> -->
+
+    <!-- Functions with an @api annotation may not make null
+         comparisons but have to use empty() -->
+    <!-- <rule ref="MySource.PHP.AjaxNullComparison"/> -->
+
+
+    <!-- Classes must have their opening brace on a new line
+         and must indeted by $indent spaces.
+         http://pear.php.net/manual/en/standards.classdef.php -->
+    <!-- <rule ref="PEAR.Classes.ClassDeclaration">
+      <properties>
+        <property name="indent" value="4"/>
+      </properties>
+      </rule> -->
+
+    
 </ruleset>

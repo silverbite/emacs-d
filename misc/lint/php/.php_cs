@@ -7,7 +7,7 @@ $xt_fixers = [
         'enabled' => true,
     ],
     [
-        'fixer'   =>'encoding',
+        'fixer'   => 'encoding',
         'comment' => 'PHP code MUST use only UTF-8 without BOM (remove BOM).', // [PSR-1]
         'enabled' => true,
     ],
@@ -19,12 +19,12 @@ $xt_fixers = [
     [
         'fixer'   => 'braces',
         'comment' => 'The body of each structure MUST be enclosed by braces. Braces should be properly placed. Body of braces should be properly indented.', // [PSR-2]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'class_definition',
         'comment' => 'Whitespace around the key words of a class, trait or interfaces definition should be one space.', // [PSR-2]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'elseif',
@@ -64,7 +64,7 @@ $xt_fixers = [
     [
         'fixer'   => 'lowercase_constants',
         'comment' => 'The PHP constants true, false, and null MUST be in lower case.', // [PSR-2]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'lowercase_keywords',
@@ -99,7 +99,7 @@ $xt_fixers = [
     [
         'fixer'   => 'single_line_after_imports',
         'comment' => 'Each namespace use MUST go on its own line and there MUST be one blank line after the use statements block.', // [PSR-2]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'switch_case_semicolon_to_colon',
@@ -144,7 +144,7 @@ $xt_fixers = [
     [
         'fixer'   => 'double_arrow_multiline_whitespaces',
         'comment' => 'Operator => should not be surrounded by multi-line whitespaces.', // [symfony]
-        'enabled' => true,
+        'enabled' => true, // @later
     ],
     [
         'fixer'   => 'duplicate_semicolon',
@@ -174,12 +174,12 @@ $xt_fixers = [
     [
         'fixer'   => 'heredoc_to_nowdoc',
         'comment' => 'Convert heredoc to nowdoc if possible.', // [symfony]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'include',
         'comment' => 'Include/Require and file path should be divided with a single space. File path should not be placed under brackets.', // [symfony]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'join_function',
@@ -224,7 +224,7 @@ $xt_fixers = [
     [
         'fixer'   => 'no_blank_lines_after_class_opening',
         'comment' => 'There should be no empty lines after class opening brace.', // [symfony]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'no_empty_lines_after_phpdocs',
@@ -234,7 +234,7 @@ $xt_fixers = [
     [
         'fixer'   => 'object_operator',
         'comment' => 'There should not be space before or after object T_OBJECT_OPERATOR.', // [symfony]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'operators_spaces',
@@ -324,7 +324,7 @@ $xt_fixers = [
     [
         'fixer'   => 'remove_leading_slash_use',
         'comment' => 'Remove leading slashes in use clauses.', // [symfony]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'remove_lines_between_uses',
@@ -364,7 +364,7 @@ $xt_fixers = [
     [
         'fixer'   => 'single_quote',
         'comment' => 'Convert double quotes to single quotes for simple strings.', // [symfony]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'spaces_after_semicolon',
@@ -394,32 +394,32 @@ $xt_fixers = [
     [
         'fixer'   => 'trim_array_spaces',
         'comment' => 'Arrays should be formatted like function/method arguments, without leading or trailing single line space.', // [symfony]
-        'enabled' => true,
+        'enabled' => true, // @later
     ],
     [
         'fixer'   => 'unalign_double_arrow',
         'comment' => 'Unalign double arrow symbols.', // [symfony]
-        'enabled' => true,
+        'enabled' => true, // @later
     ],
     [
         'fixer'   => 'unalign_equals',
         'comment' => 'Unalign equals symbols.', // [symfony]
-        'enabled' => true,
+        'enabled' => true, // @later
     ],
     [
         'fixer'   => 'unary_operators_spaces',
         'comment' => 'Unary operators should be placed adjacent to their operands.', // [symfony]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'unneeded_control_parentheses',
         'comment' => 'Removes unneeded parentheses around control statements.', // [symfony]
-        'enabled' => true,
+        'enabled' => false, @later
     ],
     [
-        'fixer'   =>  'unused_use',
+        'fixer'   => 'unused_use',
         'comment' => 'Unused use statements must be removed.', // [symfony]
-        'enabled' => TRUE,
+        'enabled' => true,
     ],
     [
         'fixer'   => 'whitespacy_lines',
@@ -444,7 +444,7 @@ $xt_fixers = [
     [
         'fixer'   => 'echo_to_print',
         'comment' => 'Converts echo language construct to print if possible.', // [contrib]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'ereg_to_preg',
@@ -464,12 +464,12 @@ $xt_fixers = [
     [
         'fixer'   => 'logical_not_operators_with_successor_space',
         'comment' => 'Logical NOT operators (!) should have one trailing whitespace.', // [contrib]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'long_array_syntax',
         'comment' => 'Arrays should use the long syntax.', // [contrib]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'multiline_spaces_before_semicolon',
@@ -484,7 +484,7 @@ $xt_fixers = [
     [
         'fixer'   => 'no_blank_lines_before_namespace',
         'comment' => 'There should be no blank lines before a namespace declaration.', // [contrib]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'no_useless_return',
@@ -524,7 +524,7 @@ $xt_fixers = [
     [
         'fixer'   => 'short_array_syntax',
         'comment' => 'PHP arrays should use the PHP 5.4 short-syntax.', // [contrib]
-        'enabled' => true,
+        'enabled' => true, // @later
     ],
     [
         'fixer'   => 'short_echo_tag',
@@ -534,20 +534,14 @@ $xt_fixers = [
     [
         'fixer'   => 'strict',
         'comment' => 'Comparison should be strict. Warning! This could change code behavior.', // [contrib]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
     [
         'fixer'   => 'ict_param',
         'comment' => 'Functions should be used with $strict param. Warning! This could change code behavior.', // [contrib]
-        'enabled' => true,
+        'enabled' => false, // @later
     ],
 ];
-
-$finder = Symfony\CS\Finder\DefaultFinder::create()
-        ->in(__DIR__);
-
-$config = Symfony\CS\Config::create()
-        ->level(Symfony\CS\FixerInterface::NONE_LEVEL);
 
 $fixers = [];
 
@@ -557,7 +551,33 @@ foreach ($xt_fixers as $fixer_arr)
     {
         $fixers[] = $fixer_arr['fixer'];
     }
+    else
+    {
+        $fixers[] = '-'.$fixer_arr['fixer'];
+    }
 }
 
-return $config->fixers($fixers)
-    ->finder($finder);
+$finder = Symfony\CS\Finder\DefaultFinder::create()
+    ->in(__DIR__);
+
+/*
+$finder = Symfony\CS\Finder\DefaultFinder::create()
+        ->notName('README.md')
+        ->notName('.php_cs')
+        ->notName('composer.*')
+        ->notName('phpunit.xml*')
+        ->notName('*.xml')
+        ->exclude('app')
+        ->exclude('bin')
+        ->exclude('migrations')
+        ->exclude('vendor')
+        ->exclude('web/bundles')
+        ->in(__DIR__);
+*/
+
+$config = Symfony\CS\Config\Config::create()
+        //->level(Symfony\CS\FixerInterface::NONE_LEVEL)
+        ->fixers($fixers)
+        ->finder($finder);
+
+return $config;

@@ -189,7 +189,7 @@
 ;; anzu-mode enhances isearch & query-replace by showing total matches and current match position
 (require-package 'anzu)
 (global-anzu-mode)
-(diminish 'anzu-mode)
+
 
 (global-set-key (kbd "M-%") 'anzu-query-replace)
 (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
@@ -543,6 +543,7 @@
 (eval-after-load "git-gutter" '(diminish 'git-gutter-mode))
 (eval-after-load "helm" '(diminish 'helm-mode))
 (eval-after-load "projectile" '(diminish 'projectile-mode))
+(eval-after-load "anzu" '(diminish 'anzu-mode))
 
 
 ;; Start with frame maximized

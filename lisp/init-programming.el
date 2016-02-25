@@ -124,8 +124,7 @@
 ;;------------------------------------------------------------------------------
 ;; https://github.com/flycheck/flycheck
 (require-package 'flycheck)
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-(add-hook 'prog-mode-hook #'global-flycheck-mode)
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 
 ;;phpcs settings
@@ -159,13 +158,50 @@
 ;; https://github.com/pashky/restclient.el
 (require-package 'restclient)
 
-;;-------------------------------------------------------------------------------
-;; Yasnippet
-;;------------------------------------------------------------------------------
 
 (require-package 'yasnippet)
-
 (yas-global-mode 1)
+
+
+;; (require-package 'guru-mode)
+;; (add-hook 'prog-mode-hook 'guru-mode)
+;; Globally
+;; (guru-global-mode +1)
+;; (setq guru-warn-only t)
+
+
+;; Aggressive indent
+(require-package 'aggressive-indent)
+
+(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+(add-hook 'css-mode-hook #'aggressive-indent-mode)
+
+;; (global-aggressive-indent-mode 1)
+;; (add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+
+
+(require-package 'imenu-anywhere)
+(global-set-key (kbd "C-.") #'imenu-anywhere)
+
+
+(require-package 'super-save)
+(super-save-mode +1)
+
+(setq super-save-auto-save-when-idle t)
+(setq auto-save-default nil)
+
+
+(require-package 'crux)
+(require 'crux)
+
+(global-set-key [remap move-beginning-of-line] #'crux-move-beginning-of-line)
+(global-set-key (kbd "C-c o") #'crux-open-with)
+(global-set-key [(shift return)] #'crux-smart-open-line)
+(global-set-key [remap kill-whole-line] #'crux-kill-whole-line)
+
+(setq save-abbrevs 'silently)
+(setq-default abbrev-mode t)
 
 
 (provide 'init-programming)

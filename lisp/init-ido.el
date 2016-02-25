@@ -1,30 +1,37 @@
+;;; init-ido.el --- Ido and smex
+;;
+;; Copyright (c) 2016 Xitkov
+;;
+
+;;; Commentary:
+
+;;; License:
+
+;;; Code:
+
 ;;------------------------------------------------------------------------------
 ;; Ido related
 ;;------------------------------------------------------------------------------
 
 ;; use ido for minibuffer completion
 (require-package 'ido)
-(require-package 'flx-ido)
-(require-package 'ido-ubiquitous)
-(require-package 'ido-vertical-mode)
-(require-package 'smex)
-
 (ido-mode t)
-(ido-everywhere t)
+
+(require-package 'flx-ido)
+(flx-ido-mode t)
+
+(require-package 'ido-ubiquitous)
 (ido-ubiquitous-mode t)
+
+(require-package 'ido-vertical-mode)
 (ido-vertical-mode t)
 
-;; disable ido faces to see flx highlights.
-(flx-ido-mode t)
+(ido-everywhere t)
+
 (setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
 
 ;; If you don't want to use the flx's highlights you can turn them off like this:
-;; (setq flx-ido-use-faces nil)
-
-
-;; (setq smex-save-file (expand-file-name ".smex-items" xt-savefile-dir))
-(smex-initialize)
+(setq flx-ido-use-faces nil)
 
 (setq ido-save-directory-list-file "~/.emacs.d/.ido.last")
 (setq ido-enable-flex-matching t)
@@ -40,7 +47,19 @@
       '("\n-> " "" "\n   " "\n   ..." "[" "]"
 	" [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]"))
 
+
 ;; C-x C-j opens dired with the cursor right on the file you're editing
 (require 'dired-x)
 
+
+(require-package 'smex)
+
+(setq smex-save-file "~/.emacs.d/.smex-items")
+(smex-initialize)
+
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
 (provide 'init-ido)
+
+;;; init-ido.el ends here

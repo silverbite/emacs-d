@@ -1,7 +1,13 @@
-;;------------------------------------------------------------------------------
-;; Project Management
-;;------------------------------------------------------------------------------
-;; Manage projects efficiently
+;;; xt-misc.el --- Project management
+;;
+;; Copyright (c) 2016 Xitkov
+;;
+
+;;; Commentary:
+
+;;; License:
+
+;;; Code:
 
 ;;------------------------------------------------------------------------------
 ;; Helm
@@ -9,6 +15,7 @@
 ;; http://tuhdo.github.io/helm-intro.html
 
 (require-package 'helm)
+
 (require 'helm)
 (require 'helm-config)
 (require 'helm-ring)
@@ -47,11 +54,9 @@
 ;; (helm-autoresize-mode 1)
 
 
-;;------------------------------------------------------------------------------
-;; Helm key bindings
-;;------------------------------------------------------------------------------
 (setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-m") 'helm-M-x)
+;; (global-set-key (kbd "M-x") 'execute-extended-command)
 
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
@@ -72,7 +77,7 @@
 ;; (setq projectile-indexing-method 'native)
 
 ;; Caching, enabled by default
-;; (setq projectile-enable-caching t)
+(setq projectile-enable-caching t)
 
 ;; By default it uses 'ido'
 ;; (setq projectile-completion-system 'default)
@@ -87,10 +92,10 @@
 ;; Enable projectile
 (projectile-global-mode t)
 
-(require-package 'helm-projectile)
-
 ;; Enable helm-projectile
+(require-package 'helm-projectile)
 (helm-projectile-on)
+
 
 ;; http://tuhdo.github.io/helm-projectile.html
 ;; Switch to a project and execute an action specified in projectile-switch-project-action variable.
@@ -98,6 +103,7 @@
 ;; My suggestion is to bind it to helm-projectile-find-file, as it provides the same thing as projectile-find-file but with more feature:
 ;; (setq projectile-switch-project-action 'helm-projectile-find-file)
 (setq projectile-switch-project-action 'helm-projectile)
+
 
 ;; Tramp mode is much slower than using terminal to ssh
 ;; http://emacs.stackexchange.com/a/17579
@@ -113,11 +119,6 @@
 
 ;; Toggle the perspective mode
 ;; (persp-mode)
-
-;;; Whitespace butler
-(require-package 'ws-butler)
-
-(add-hook 'prog-mode-hook 'ws-butler-mode)
 
 
 (provide 'init-project)

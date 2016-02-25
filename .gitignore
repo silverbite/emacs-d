@@ -13,7 +13,7 @@ custom.el
 history
 .emacs_workgroups
 projectile-bookmarks.eld
-smex-items
+.smex-items
 tramp
 
 eshell/*

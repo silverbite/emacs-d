@@ -1,392 +1,16 @@
-;;------------------------------------------------------------------------------
-;; Windows
-;;------------------------------------------------------------------------------
-
-;; full path in title bar
-(setq-default frame-title-format "%b (%f)")
-
-;; don't pop up font menu
-;; (global-set-key (kbd "s-t") '(lambda () (interactive)))
-
-;; no bell, removes the audio bell as well as
-;; the black box that appears when audio is disabled
-;; https://github.com/flyingmachine/emacs-for-clojure/blob/master/customizations/ui.el
-(setq ring-bell-function 'ignore)
-
-;; Navigate windows with M-<arrows>
-(windmove-default-keybindings 'meta)
-(setq windmove-wrap-around t)
-
-; winner-mode provides C-<left> to get back to previous window layout
-(winner-mode 1)
-
-;; whenever an external process changes a file underneath emacs, and there
-;; was no unsaved changes in the corresponding buffer, just revert its
-;; content to reflect what's on-disk.
-(global-auto-revert-mode 1)
-
-;; M-x shell is a nice shell interface to use, let's make it colorful.  If
-;; you need a terminal emulator rather than just a shell, consider M-x term
-;; instead.
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-;; If you do use M-x term, you will notice there's line mode that acts like
-;; emacs buffers, and there's the default char mode that will send your
-;; input char-by-char, so that curses application see each of your key
-;; strokes.
+;;; xt-sane-defaults.el --- Sane defaults
 ;;
-;; The default way to toggle between them is C-c C-j and C-c C-k, let's
-;; better use just one key to do the same.
-(require 'term)
-(define-key term-raw-map  (kbd "C-'") 'term-line-mode)
-(define-key term-mode-map (kbd "C-'") 'term-char-mode)
+;; Copyright (c) 2016 Xitkov
+;;
 
-;; Have C-y act as usual in term-mode, to avoid C-' C-y C-'
-;; Well the real default would be C-c C-j C-y C-c C-k.
-(define-key term-raw-map  (kbd "C-y") 'term-paste)
+;;; Commentary:
 
+;;; License:
 
-;; under mac, have Command as Meta and keep Option for localized input
-;; (when (string-match "apple-darwin" system-configuration)
-;;   (setq mac-allow-anti-aliasing t)
-;;   (setq mac-command-modifier 'meta)
-;;   (setq mac-option-modifier 'none))
+;;; Code:
 
-;; Use the clipboard, pretty please, so that copy/paste "works"
-(setq x-select-enable-clipboard t)
-(setq x-select-enable-primary t)
-
-;; https://github.com/flyingmachine/emacs-for-clojure/blob/master/customizations/misc.el
-;; Changes all yes/no questions to y/n type
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; shell scripts
-(setq-default sh-basic-offset 2)
-(setq-default sh-indentation 2)
-
-;; No need for ~ files when editing
-(setq create-lockfiles nil)
-
-;;------------------------------------------------------------------------------
-;; Others
-;;------------------------------------------------------------------------------
-
-;; Remove trailing whitespace on saving
-;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
-;; http://batsov.com/articles/2011/11/25/emacs-tip-number-3-whitespace-cleanup/
-(add-hook 'before-save-hook 'whitespace-cleanup)
-
-;; make indentation commands use space only (never tab character)
-(setq-default indent-tabs-mode nil)    ; use only spaces and no tabs
-
-;; set default tab char's display width to 4 spaces
-(setq default-tab-width 4)
-
-;; set current buffer's tab char's display width to 4 spaces
-(setq tab-width 4)
-
-;; Column number mode
-(setq column-number-mode t)
-
-;; Show matching parenthesis
-(show-paren-mode 1)
-
-;; Use unix Line endings
-(setq-default buffer-file-coding-system 'utf-8-unix)
-
-
-;; Window navigation using shift + <direction>
-;; (windmove-default-keybindings)
-
-;; Undo window kills
-;; http://www.emacswiki.org/emacs/WinnerMode
-;; (when (fboundp 'winner-mode)
-;;   (winner-mode 1))
-
-;;;; remaps
-(define-key key-translation-map (kbd "<C-tab>") (kbd "M-TAB"))
-(define-key key-translation-map (kbd "C-x C-m") (kbd "M-x"))
-(define-key key-translation-map (kbd "C-x C-d") (kbd "C-x d"))
-
-(define-key 'help-command "a" 'apropos)
-
-;; Allow access from emacsclient
-(require 'server)
-(unless (server-running-p)
-  (server-start))
-
-;; full screen
-(defun fullscreen ()
-  (interactive)
-  (set-frame-parameter nil 'fullscreen
-               (if (frame-parameter nil 'fullscreen) nil 'fullboth)))
-(global-set-key [f11] 'fullscreen)
-
-;; Disable auto-save and auto-backup
-;; http://emacsredux.com/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/
-
-;; (setq auto-save-default nil)
-;; (setq make-backup-files nil)
-
-;; store all backup and autosave files in the tmp dir
-;; (setq backup-directory-alist
-;;       `((".*" . ,temporary-file-directory)))
-;; (setq auto-save-file-name-transforms
-;;       `((".*" ,temporary-file-directory t)))
-
-
-;; Put autosave files (ie #foo#) and backup files (ie foo~) in ~/.emacs.d/.
-;; https://snarfed.org/gnu_emacs_backup_files
-
-(custom-set-variables
- '(auto-save-file-name-transforms '((".*" "~/.emacs.d/autosaves/\\1" t)))
- '(backup-directory-alist '((".*" . "~/.emacs.d/backups/"))))
-
-;; create the autosave dir if necessary, since emacs won't.
-(make-directory "~/.emacs.d/autosaves/" t)
-
-
-;; Disable scrolling
-;; scroll one line at a time (less "jumpy" than defaults)
-;; http://fgiasson.com/blog/index.php/2014/05/22/my-optimal-gnu-emacs-settings-for-developing-clojure-so-far/
-;; (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-;; (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-;; (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-;; (setq scroll-step 1) ;; keyboard scroll one line at a time
-
-
-;;------------------------------------------------------------------------------
-;; Garbage collection tuning
-;;------------------------------------------------------------------------------
-;; https://github.com/lewang/flx
-
-;; By default Emacs will initiate GC every 0.76 MB allocated (gc-cons-threshold == 800000). If we increase this to 20 MB (gc-cons-threshold == 20000000) we get:
-
-;; (benchmark-run 1
-;;   (setq gc-cons-threshold 20000000)
-;;   (let ((cache (flx-make-filename-cache)))
-;;     (dolist (i (number-sequence 0 10000))
-;;       (flx-process-cache (uuid) cache))))
-;;     ;;; ⇒ (0.62035 1 0.05461100000000041)
-
-;; So if you have a modern machine, I encourage you to add the following:
-(setq gc-cons-threshold 20000000)
-
-;; Require final new line
-(setq require-final-newline t)
-
-;; Delete selection
-(delete-selection-mode t)
-
-(set-default 'imenu-auto-rescan t)
-
-;; Tramp
-(require 'tramp)
-;; Use ssh
-(setq tramp-default-method "ssh")
-
-;; anzu-mode enhances isearch & query-replace by showing total matches and current match position
-(require-package 'anzu)
-(global-anzu-mode)
-
-
-(global-set-key (kbd "M-%") 'anzu-query-replace)
-(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
-
-;; enable some really cool extensions like C-x C-j(dired-jump)
-(require 'dired-x)
-
-;; clean up obsolete buffers automatically
-(require 'midnight)
-
-;; smarter kill-ring navigation
-(require-package 'browse-kill-ring)
-(browse-kill-ring-default-keybindings)
-(global-set-key (kbd "s-y") 'browse-kill-ring)
-
-
-;; (setq save-interprogram-paste-before-kill t)
-;; (setq apropos-do-all t)
-;; (setq mouse-yank-at-point t)
-;; (setq visible-bell t)
-;; (setq load-prefer-newer t)
-;; (setq ediff-window-setup-function 'ediff-setup-windows-plain)
-;; (setq save-place-file (concat user-emacs-directory "places"))
-;; (setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
-
-
-;;----------------------------------------------------------------------------
-;; Nicer naming of buffers for files with identical names
-;;----------------------------------------------------------------------------
-
-;; These customizations make it easier for you to navigate files,
-;; switch buffers, and choose options from the minibuffer.
-
-
-;; "When several buffers visit identically-named files,
-;; Emacs must give the buffers distinct names. The usual method
-;; for making buffer names unique adds ‘<2>’, ‘<3>’, etc. to the end
-;; of the buffer names (all but one of them).
-;; The forward naming method includes part of the file's directory
-;; name at the beginning of the buffer name
-;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Uniquify.html
-(require 'uniquify)
-
-;; (setq uniquify-buffer-name-style 'forward)
-;; (setq uniquify-buffer-name-style 'post-forward)
-(setq uniquify-buffer-name-style 'reverse)
-
-(setq uniquify-separator " • ")
-;; (setq uniquify-separator ":")
-
-(setq uniquify-after-kill-buffer-p t)
-(setq uniquify-ignore-buffers-re "^\\*")
-
-;; @see http://www.emacswiki.org/emacs/SavePlace
-(require-package 'saveplace)
-(setq-default save-place t)
-
-;;(setq save-place-file (expand-file-name ".places" user-emacs-directory)))
-(setq save-place-file (concat user-emacs-directory ".saved-places"))
-(setq save-place-forget-unreadable-files nil)
-
-;; Turn on recent file mode so that you can more easily switch to
-;; recently edited files when you first start emacs
-(require-package 'recentf)
-
-(setq recentf-save-file (concat user-emacs-directory ".recentf"))
-
-(setq recentf-max-saved-items 300
-      recentf-exclude '("/auto-install/" ".recentf" "/repos/" "/elpa/"
-                        "\\.mime-example" "\\.ido.last" "COMMIT_EDITMSG"
-                        ".gz" "/anaconda-mode" "/auto-save-list" "/autosaves"
-                        "~$" "/tmp/" "/ssh:" "/sudo:" "/scp:" "semanticdb"
-                        "/backups" "/eshell" "/project-explorer-cache" )
-      recentf-auto-cleanup 600)
-
-(setq recentf-max-menu-items 40)
-
-(recentf-mode 1)
-
-
-;;------------------------------------------------------------------------------
-;; Locale environment and variables
-;;------------------------------------------------------------------------------
-;; http://www.emacswiki.org/emacs/EmacsCrashCode
-
-;; (setq european-calendar-style 't)              ; European style calendar
-;; (setq calendar-week-start-day 1)               ; Week starts monday
-;; (setq ps-paper-type 'a4)                       ; Specify printing format
-;; (setq ispell-dictionary "english")             ; Set ispell dictionary
-;; (setq shell-file-name "/bin/bash")             ; Set Shell for M-| command
-;; (setq tex-shell-file-name "/bin/bash")         ; Set Shell used by TeX
-;; (setq grep-command "grep -i -nH -e ")          ; Set grep command options
-;; (setq exec-path (append exec-path '("/bin")))  ; Change binary path
-
-
-;; (setq auto-save-timeout 60)                    ; Autosave every minute
-;; (desktop-save-mode t)                          ; Save session before quitting
-;; (setq confirm-kill-emacs 'yes-or-no-p)         ; Confirm quit
-;; (speedbar t)                                   ; Quick file access with bar
-;; (setq make-backup-files nil)                   ; No backup files ~
-;; (setq read-file-name-completion-ignore-case 't); Ignore case when completing file names
-
-
-;; (setq-default indent-tabs-mode nil)            ; Use spaces instead of tabs
-;; (setq tab-width 4)                             ; Length of tab is 4 SPC
-;; (setq sentence-end-double-space nil)           ; Sentences end with one space
-;; (setq truncate-partial-width-windows nil)      ; Don't truncate long lines
-;; (setq-default indicate-empty-lines t)          ; Show empty lines
-;; (setq next-line-add-newlines t)                ; Add newline when at buffer end
-;; (setq require-final-newline 't)                ; Always newline at end of file
-;; (global-linum-mode 1)                          ; Show line numbers on buffers
-;; (show-paren-mode 1)                            ; Highlight parenthesis pairs
-;; (setq blink-matching-paren-distance nil)       ; Blinking parenthesis
-;; (setq show-paren-style 'expression)            ; Highlight text between parens
-
-
-;; (setq pop-up-frame t)                          ; Buffers in separate frames
-;; (setq frame-title-format "%b - emacs")         ; Use buffer name as frame title
-;; (global-set-key "\C-x\C-b" 'buffer-menu)       ; CxCb puts point on buffer list
-;; (setq window-min-height 10)                    ; Minimal height of windows
-;; (setq enable-recursive-minibuffers t)          ; Stack  minibuffers
-;; (icomplete-mode t)                             ; Completion in mini-buffer
-;; (setq read-buffer-completion-ignore-case 't)   ; Ignore case when completing buffer names
-;; (windmove-default-keybindings)                 ; Shift arrows switch windows
-                                                  ; Note: This interferes with
-                                                  ;  cua-mode where shift arrow starts
-                                                  ;  marking. An alternative is
-                                                  ;  (windmove-default-keybindings 'meta)
-;; (setq-default case-fold-search t)              ; Search is case sensitive
-
-;; (put 'narrow-to-region  'disabled nil)         ; Allow narrow-to-region command
-;; (setq disabled-command-hook nil)               ; Allow all disabled commands
-;; (setq undo-limit 100000)                       ; Increase number of undo
-;; (defalias 'qrr 'query-replace-regexp)          ; Define an alias
-;; (setq default-major-mode 'text-mode)           ; Text-mode is default mode
-;; (add-hook 'text-mode-hook 'turn-on-auto-fill)  ; auto-formatting in text-mode
-;; (defalias 'yes-or-no-p 'y-or-n-p)              ; y/n instead of yes/no
-;; (require 'cl)                                  ; Use Common Lisp features
-                                                  ; Note: There are some problems
-                                                  ;  with this. It might be better
-                                                  ;  to just use it when compiling
-                                                  ;  elisp files, see the elisp manual.
-
-
-;; (tool-bar-mode nil)                            ; No toolbar
-;; (mouse-wheel-mode t)                           ; Mouse-wheel enabled
-;; (column-number-mode t)                         ; Show column number in mode-line
-;; (global-hl-line-mode t)                        ; Highlight cursor line
-;; (blink-cursor-mode 0)                          ; No blinking cursor
-;; (icomplete-mode t)                             ; Completion in mini-buffer
-;; (desktop-save-mode t)                          ; Save session before quitting
-;; (speedbar t)                                   ; Quick file access with bar
-;; (cua-mode t)                                   ; Cut/Paste with C-x/C-c/C-v
-
-
-;;------------------------------------------------------------------------------
-;; Eyecandy for Emacs
-;;------------------------------------------------------------------------------
-
-(tooltip-mode -1)
-(blink-cursor-mode -1)
-(setq track-eol nil)                           ; Cursor don't track end-of-line
-(setq mouse-yank-at-point t)                   ; Paste at cursor position
-(setq scroll-preserve-screen-position t)       ; Scroll without moving cursor
-;; (set-cursor-color "black")                  ; Cursor color
-(mouse-avoidance-mode 'jump)                   ; Mouse avoids cursor
-(mouse-wheel-mode t)
-
-(line-number-mode 1)                           ; have line numbers and
-(column-number-mode t)                         ; column numbers in the mode line
-(global-hl-line-mode t)                        ; highlight current line
-;; (global-linum-mode 1)                       ; add line numbers on the left
-
-(global-font-lock-mode 1)                      ; Color enabled
-(setq font-lock-maximum-decoration t)
-(setq color-theme-is-global t)
-(setq truncate-partial-width-windows nil)
-
-(define-key menu-bar-tools-menu [games] nil)   ; Remove games menu
-;; (set-background-color "darkblue")           ; Background color
-;; (set-face-background 'region "gray80")      ; Color for selected lines
-
-;; Nyan cat for emacs!
-;; (require-package 'nyan-mode)
-;; (setq nyan-wavy-trail t)
-;; (setq nyan-animate-nyancat t)
-;; (nyan-mode t)
-
-
-;;-----------------------------------------------------------------------------
-;; Remove GUI elements
-;;-----------------------------------------------------------------------------
-;; https://github.com/milkypostman/dotemacs/blob/master/init.el
-;; https://github.com/dimitri/emacs-kicker/blob/master/init.el
 
 ;; Turn off mouse interface early in startup to avoid momentary display
-
 (set-scroll-bar-mode 'right)                   ; Scrollbar on the right
 
 (when (fboundp 'menu-bar-mode) (tool-bar-mode -1))
@@ -400,185 +24,159 @@
 (setq inhibit-splash-screen t)          ; no splash screen, thanks
 (setq visible-bell t)                   ; don't let Emacs hurt your ears
 
-;; avoid compiz manager rendering bugs
-;; (add-to-list 'default-frame-alist '(alpha . 100))
-;; (add-to-list 'default-frame-alist '(font . "")); Change fonts
 
-;;------------------------------------------------------------------------------
-;; Fonts, themes
-;;------------------------------------------------------------------------------
+;; full path in title bar
+;;(setq-default frame-title-format "%b (%f)")
 
-;; choose your own fonts, in a system dependant way
-(if (string-match "apple-darwin" system-configuration)
-;;    (set-face-font 'default "Monaco-11")
-    (set-face-font 'default "Source Code Pro-12")
-  (set-face-font 'default "Monospace-10"))
-
-(require-package 'noctilux-theme)
-(require-package 'zenburn-theme)
-(require-package 'solarized-theme)
-
-(load-theme 'solarized-dark t)
+;; more useful frame title, that show either a file or a
+;; buffer name (if the buffer isn't visiting a file)
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+                   (abbreviate-file-name (buffer-file-name))
+                 "%b"))))
 
 
-;;------------------------------------------------------------------------------
-;; Sexy mode line
-;;------------------------------------------------------------------------------
+;; Disable auto-save and auto-backup
+;; http://emacsredux.com/blog/2013/05/09/keep-backup-and-auto-save-files-out-of-the-way/
+(setq auto-save-default nil)
+(setq make-backup-files nil)
 
-;; Powerline
-;; (require-package 'powerline)
-;; (powerline-default-theme)
-
-;; Smart mode line
-(require-package 'smart-mode-line)
-
-(setq sml/no-confirm-load-theme t)
-
-;; (setq sml/theme 'dark)
-;; (setq sml/theme 'light)
-(setq sml/theme 'respectful)
-
-(sml/setup)
-
-;; (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/Projects/In-Development/" ":ProjDev:") t)
-;; (add-to-list 'sml/replacer-regexp-list '("^~/Documents/Work/" ":Work:") t)
-
-;; Added in the right order, they even work sequentially:
-;; (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/" ":DB:") t)
-;; (add-to-list 'sml/replacer-regexp-list '("^:DB:Documents" ":DDocs:") t)
-;; (add-to-list 'sml/replacer-regexp-list '("^~/Git-Projects/" ":Git:") t)
-;; (add-to-list 'sml/replacer-regexp-list '("^:Git:\\(.*\\)/src/main/java/" ":G/\\1/SMJ:") t)
+;; store all backup and autosave files in the tmp dir
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 
-;;------------------------------------------------------------------------------
-;; http://zeekat.nl/articles/making-emacs-work-for-me.html
-;;------------------------------------------------------------------------------
-
-;; Show current time
-(setq display-time-24hr-format t)
-(display-time-mode +1)
-
-;; Prefer single frames
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
-
-;; Start with an empty scratch buffer in org mode; no start up screen.
-(setq initial-major-mode 'org-mode)
-
-;;------------------------------------------------------------------------------
-;; http://writequit.org/org/settings.html#sec-1-3-12
-;;------------------------------------------------------------------------------
-
-(setq whitespace-line-column 140)
-
-(setq whitespace-style '(tabs newline space-mark
-                              tab-mark newline-mark
-                              face lines-tail))
-
-(setq whitespace-display-mappings
-      ;; all numbers are Unicode codepoint in decimal. e.g. (insert-char 182 1)
-      ;; 32 SPACE, 183 MIDDLE DOT
-      '((space-mark nil)
-        ;; 10 LINE FEED
-        ;;(newline-mark 10 [172 10])
-        (newline-mark nil)
-        ;; 9 TAB, MIDDLE DOT
-        (tab-mark 9 [183 9] [92 9])))
-
-(setq whitespace-global-modes '(not org-mode
-                                    eshell-mode
-                                    shell-mode
-                                    web-mode
-                                    log4j-mode
-                                    "Web"
-                                    dired-mode
-                                    emacs-lisp-mode
-                                    clojure-mode
-                                    lisp-mode))
-
-;; turn on whitespace mode globally
-(global-whitespace-mode 1)
-
-(set-default 'indicate-empty-lines t)
-(setq show-trailing-whitespace t)
-
-;; (paredit-mode 1)
-(eldoc-mode 1)
-
-(setq eldoc-idle-delay 0.3)
-(set-face-attribute 'eldoc-highlight-function-argument nil
-                    :underline t :foreground "green"
-                    :weight 'bold)
-
-;; Change the faces for elisp regex grouping: 
-(set-face-foreground 'font-lock-regexp-grouping-backslash "#ff1493")
-(set-face-foreground 'font-lock-regexp-grouping-construct "#ff8c00")
-
-;; http://writequit.org/org/settings.html#sec-1-3-12
+;; make indentation commands use space only (never tab character)
+(setq-default indent-tabs-mode nil)    ; use only spaces and no tabs
+(setq-default tab-width 4) ; set default tab char's display width to 4 spaces
+(setq-default buffer-file-coding-system 'utf-8-unix) ; Use unix Line endings
+(setq-default sh-basic-offset 4)
+(setq-default sh-indentation 4)
 (setq-default indicate-buffer-boundaries 'right)
-(toggle-indicate-empty-lines)
 
-;;------------------------------------------------------------------------------
-;; Unclutter the modeline
-;;------------------------------------------------------------------------------
-;; https://github.com/magnars/.emacs.d/blob/master/settings/appearance.el
-
-(require-package 'diminish)
-(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
-(eval-after-load "eldoc" '(diminish 'eldoc-mode))
-(eval-after-load "paredit" '(diminish 'paredit-mode))
-(eval-after-load "tagedit" '(diminish 'tagedit-mode))
-(eval-after-load "elisp-slime-nav" '(diminish 'elisp-slime-nav-mode))
-(eval-after-load "skewer-mode" '(diminish 'skewer-mode))
-(eval-after-load "skewer-css" '(diminish 'skewer-css-mode))
-(eval-after-load "skewer-html" '(diminish 'skewer-html-mode))
-(eval-after-load "smartparens" '(diminish 'smartparens-mode))
-(eval-after-load "guide-key" '(diminish 'guide-key-mode))
-(eval-after-load "subword" '(diminish 'subword-mode))
-(eval-after-load "whitespace-cleanup-mode" '(diminish 'whitespace-cleanup-mode))
-(eval-after-load "whitespace" '(diminish 'global-whitespace-mode))
-
-;; Added by xitkov
-(eval-after-load "ws-butler" '(diminish 'ws-butler-mode))
-(eval-after-load "highlight-symbol" '(diminish 'highlight-symbol-mode))
-(eval-after-load "git-gutter" '(diminish 'git-gutter-mode))
-(eval-after-load "helm" '(diminish 'helm-mode))
-(eval-after-load "projectile" '(diminish 'projectile-mode))
-(eval-after-load "anzu" '(diminish 'anzu-mode))
+(set-default 'imenu-auto-rescan t)
+(set-default 'indicate-empty-lines t)
 
 
-;; Start with frame maximized
-;; (toggle-frame-maximized)
+;; reduce the frequency of garbage collection by making it happen on
+;; each 50MB of allocated data (the default is on every 0.76MB)
+(setq gc-cons-threshold 50000000)
+
+(setq show-trailing-whitespace t)
+(setq save-interprogram-paste-before-kill t)
+(setq apropos-do-all t)
+(setq mouse-yank-at-point t)
+(setq visible-bell nil)
+(setq load-prefer-newer t)
+(setq require-final-newline t)
+(setq ring-bell-function 'ignore)
+(setq x-select-enable-clipboard t)
+(setq x-select-enable-primary t)
+
+;; (setq show-paren-style 'expression)            ; Highlight text between parens
+;; (setq pop-up-frame t)                          ; Buffers in separate frames
+;; (setq-default case-fold-search t)              ; Search is case sensitive
+
+(setq tab-always-indent 'complete)             ; smart tab behavior - indent or complete
+(setq tab-width 4)                             ; set current buffer's tab char's display width to 4 spaces
+(setq create-lockfiles nil)                    ; No need for ~ files when editing
+(setq blink-matching-paren-distance nil)       ; Blinking parenthesis
+(setq next-line-add-newlines nil)                ; Add newline when at buffer end
+(setq require-final-newline 't)                ; Always newline at end of file
+(setq-default indicate-empty-lines nil)         ; Show empty lines
+(setq truncate-partial-width-windows nil)      ; Don't truncate long lines
+(setq read-file-name-completion-ignore-case 't); Ignore case when completing file names
+(setq confirm-kill-emacs 'yes-or-no-p)         ; Confirm quit
+(setq undo-limit 100000)                       ; Increase number of undo
+(setq initial-major-mode 'org-mode)            ; Start with an empty scratch buffer in org mode
+(setq large-file-warning-threshold 100000000)  ; warn when opening files bigger than 100MB
 
 
-;;------------------------------------------------------------------------------
-;; God mode
-;;------------------------------------------------------------------------------
-;; https://github.com/chrisdone/god-mode
+;; Navigate windows with M-<arrows>
+(windmove-default-keybindings 'meta)
+(setq windmove-wrap-around t)
 
-(require-package 'god-mode)
+(winner-mode 1) ; winner-mode provides C-<left> to get back to previous window layout
 
-(global-set-key (kbd "<escape>") 'god-local-mode)
+(global-auto-revert-mode 1) ; Revert buffer to reflect changes on disk
 
-;; (global-set-key (kbd "<escape>") 'god-mode-all)
-;; (setq god-exempt-major-modes nil)
-;; (setq god-exempt-predicates nil)
+(fset 'yes-or-no-p 'y-or-n-p) ; Changes all yes/no questions to y/n type
+
+;; (toggle-indicate-empty-lines)
+
+(line-number-mode t)
+(column-number-mode t)
+(size-indication-mode t)
+
+(blink-cursor-mode -1)                         ; No blinking cursor
+(tooltip-mode -1)                              ; No tooltip
+
+(mouse-avoidance-mode 'jump)                   ; Mouse avoids cursor
+(mouse-wheel-mode t)                           ; Mouse-wheel enabled
+
+(delete-selection-mode t)                      ; Delete selection
+
+(global-linum-mode -1)                         ; add line numbers on the left
+(global-hl-line-mode t)                        ; Highlight cursor line
+(global-font-lock-mode 1)                      ; Color enabled
+
+(icomplete-mode t)                             ; Completion in mini-buffer
+(show-paren-mode 1)                            ; Highlight parenthesis pairs
+
+(setq track-eol t)                           ; Cursor don't track end-of-line
+(setq mouse-yank-at-point t)                   ; Paste at cursor position
+(setq scroll-preserve-screen-position t)       ; Scroll without moving cursor
+(setq font-lock-maximum-decoration t)
+(setq truncate-partial-width-windows nil)
 
 
-;;------------------------------------------------------------------------------
-;; Avy mode
-;;------------------------------------------------------------------------------
-;; https://github.com/abo-abo/avy
 
-(require-package 'avy)
+;; Allow access from emacsclient
+(require 'server)
+(unless (server-running-p)
+  (server-start))
 
-(avy-setup-default)
 
-(global-set-key (kbd "C-;") 'avy-goto-char)
-(global-set-key (kbd "C-'") 'avy-goto-char-2)
-(global-set-key (kbd "M-g f") 'avy-goto-line)
-;; (global-set-key (kbd "M-g g") 'avy-goto-line) ; Can replace M-g g
-(global-set-key (kbd "M-g w") 'avy-goto-word-1)
-(global-set-key (kbd "M-g e") 'avy-goto-word-0)
+
+;; extend the help commands
+;; (define-key 'help-command (kbd "C-f") #'find-function)
+;; (define-key 'help-command (kbd "C-k") #'find-function-on-key)
+;; (define-key 'help-command (kbd "C-v") #'find-variable)
+;; (define-key 'help-command (kbd "C-l") #'find-library)
+
+;; (define-key 'help-command (kbd "C-i") #'info-display-manual)
+
+;; misc useful keybindings
+;; (global-set-key (kbd "s-<") #'beginning-of-buffer)
+;; (global-set-key (kbd "s->") #'end-of-buffer)
+;; (global-set-key (kbd "s-q") #'fill-paragraph)
+
+;; align code in a pretty way
+(global-set-key (kbd "C-x \\") #'align-regexp)
+
+;; Start eshell
+(global-set-key (kbd "C-x m") #'eshell)
+(global-set-key (kbd "C-x M") (lambda () (interactive) (eshell t)))
+
+;; Swap search
+(global-set-key (kbd "C-s") #'isearch-forward-regexp)
+(global-set-key (kbd "C-r") #'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") #'isearch-forward)
+(global-set-key (kbd "C-M-r") #'isearch-backward)
+
+(global-set-key (kbd "C-x C-b") #'ibuffer)
+;; (global-set-key (kbd "C-x C-b") '#ido-switch-buffer)
+;; (global-set-key (kbd "C-x C-c") '#ido-switch-buffer)
+;; (global-set-key (kbd "C-x B") '#ibuffer)
+
+(global-set-key (kbd "C-?") #'help-command)
+(global-set-key (kbd "M-?") #'mark-paragraph)
+(global-set-key (kbd "C-h") #'delete-backward-char)
+(global-set-key (kbd "M-h") #'backward-kill-word)
 
 
 (provide 'xt-sane-defaults)
+
+;;; xt-sane-defaults.el ends here

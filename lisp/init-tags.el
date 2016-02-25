@@ -1,12 +1,8 @@
 ;;------------------------------------------------------------------------------
-;; Ido related
+;; Gtags and ctags related
 ;;------------------------------------------------------------------------------
 
-;;
-(require-package 'ggtags)
-
 (require-package 'helm-gtags)
-
 
 ;; Enable helm-gtags-mode
 (add-hook 'php-mode-hook 'helm-gtags-mode)
@@ -20,18 +16,10 @@
      (define-key helm-gtags-mode-map (kbd "M-r") 'helm-gtags-find-rtag)
      (define-key helm-gtags-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
      (define-key helm-gtags-mode-map (kbd "M-g M-p") 'helm-gtags-parse-file)
-;;     (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
-;;     (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
-     (define-key helm-gtags-mode-map (kbd "C-M-b") 'helm-gtags-previous-history)
-     (define-key helm-gtags-mode-map (kbd "C-M-f") 'helm-gtags-next-history)
+     (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
+     (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
      (define-key helm-gtags-mode-map (kbd "M-.") 'helm-gtags-dwim)
      (define-key helm-gtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)))
 
-(defun xt/php-only-update-hooks ()
-    (when (equal major-mode 'php-mode)
-        (helm-gtags-update-tags)))
-
-;; (remove-hook 'after-save-hook 'helm-gtags-update-tags)
-(add-hook 'after-save-hook 'xt/php-only-update-hooks)
 
 (provide 'init-tags)

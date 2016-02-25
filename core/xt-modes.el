@@ -1,6 +1,13 @@
-;;------------------------------------------------------------------------------
-;; Support Major File modes
-;;------------------------------------------------------------------------------
+;;; xt-modes.el --- Modes
+;;
+;; Copyright (c) 2016 Xitkov
+;;
+
+;;; Commentary:
+
+;;; License:
+
+;;; Code:
 
 (require 'init-clojure)
 (require 'init-go)
@@ -15,3 +22,5 @@
 
 
 (provide 'xt-modes)
+
+;;; xt-modes.el ends here

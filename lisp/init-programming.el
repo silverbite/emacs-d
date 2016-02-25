@@ -1,7 +1,14 @@
-;;------------------------------------------------------------------------------
-;; Programming
-;;------------------------------------------------------------------------------
+;;; xt-misc.el --- Programming
 ;;
+;; Copyright (c) 2016 Xitkov
+;;
+
+;;; Commentary:
+
+;;; License:
+
+;;; Code:
+
 
 ;; http://www.emacswiki.org/emacs/IndentingC
 (setq c-default-style "linux"
@@ -11,34 +18,38 @@
 (require 'which-func)
 (which-function-mode 1)
 
-;;; Hippie expand
-(global-set-key (kbd "M-/") 'hippie-expand)
 
-(setq hippie-expand-try-functions-list
-      '(try-complete-file-name-partially
-        try-complete-file-name
-        try-expand-dabbrev
-        try-expand-dabbrev-all-buffers
-        try-expand-dabbrev-from-kill))
+;; https://github.com/bbatsov/emacs.d/blob/master/init.el
+;; hippie expand is dabbrev expand on steroids
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev
+                                         try-expand-dabbrev-all-buffers
+                                         try-expand-dabbrev-from-kill
+                                         try-complete-file-name-partially
+                                         try-complete-file-name
+                                         try-expand-all-abbrevs
+                                         try-expand-list
+                                         try-expand-line
+                                         try-complete-lisp-symbol-partially
+                                         try-complete-lisp-symbol))
+
+;; use hippie-expand instead of dabbrev
+(global-set-key (kbd "M-/") #'hippie-expand)
+(global-set-key (kbd "s-/") #'hippie-expand)
+
 
 ;;; Rainbow Delimiters
 (require-package 'rainbow-identifiers)
+(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 
 ;;; Rainbow delimiters
 (require-package 'rainbow-delimiters)
-
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-;; (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)
-(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 
-;; No more :(
-;; (global-rainbow-delimiters-mode)
 
 ;;; Rainbow mode
 (require-package 'rainbow-mode)
-
-;; Enable rainbow mode
 (rainbow-mode)
+
 
 ;;------------------------------------------------------------------------------
 ;; Multiple major modes
@@ -56,6 +67,7 @@
 (require-package 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
+
 ;; Smart parens
 ;;;https://github.com/Fuco1/smartparens
 (require-package 'smartparens)
@@ -67,11 +79,8 @@
 ;;; https://github.com/atlefren/.emacs.d/blob/master/lisp/init-expand-region.el
 (require-package 'expand-region)
 (require 'expand-region)
-;; keybinding
-;; (global-set-key (kbd "C-c s") 'er/expand-region)
+
 (global-set-key (kbd "C-=") 'er/expand-region)
-;; (global-set-key (kbd "<M-up>") 'er/expand-region)
-;; (global-set-key (kbd "<M-down>") 'er/contract-region)
 
 
 ;;------------------------------------------------------------------------------
@@ -80,7 +89,6 @@
 
 ;; http://zeekat.nl/articles/making-emacs-work-for-me.html
 (require-package 'magit)
-(require 'magit)
 
 ;; (setq magit-default-tracking-name-function #'magit-default-tracking-name-branch-only)
 ;; (setq magit-last-seen-setup-instructions "1.4.0")
@@ -88,24 +96,37 @@
 ;; Put signoff message on commits
 (setq magit-commit-signoff t)
 
+
 ;; https://github.com/syohex/emacs-git-gutter
 (require-package 'git-gutter)
-(require 'git-gutter)
-
-;; If you want to use git-gutter for files in git repository.
 (global-git-gutter-mode +1)
+
+
+;;------------------------------------------------------------------------------
+;; Avy mode
+;;------------------------------------------------------------------------------
+;; https://github.com/abo-abo/avy
+
+(require-package 'avy)
+
+(avy-setup-default)
+
+(global-set-key (kbd "C-;") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+;; (global-set-key (kbd "M-g g") 'avy-goto-line) ; Can replace M-g g
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(global-set-key (kbd "M-g e") 'avy-goto-word-0)
+
 
 ;;------------------------------------------------------------------------------
 ;; Flycheck related
 ;;------------------------------------------------------------------------------
 ;; https://github.com/flycheck/flycheck
 (require-package 'flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'prog-mode-hook #'global-flycheck-mode)
 
-;; Flycheck pos tip
-;; (require-package 'flycheck-pos-tip)
-;; (with-eval-after-load 'flycheck
-;;  (flycheck-pos-tip-mode))
 
 ;;phpcs settings
 ;; (setq flycheck-php-phpcs-executable "/usr/local/bin/phpcs")
@@ -122,20 +143,31 @@
 ;;------------------------------------------------------------------------------
 
 ;;; highlight symbol
-;; https://github.com/purcell/emacs.d/blob/41387d200fd496d9a96dd8dd0ee34e8b60e14555/lisp/init-editing-utils.el 
+;; https://github.com/purcell/emacs.d/blob/41387d200fd496d9a96dd8dd0ee34e8b60e14555/lisp/init-editing-utils.el
 (require-package 'highlight-symbol)
 
 (dolist (hook '(prog-mode-hook html-mode-hook css-mode-hook))
   (add-hook hook 'highlight-symbol-mode)
   (add-hook hook 'highlight-symbol-nav-mode))
 
+;;; Whitespace butler
+(require-package 'ws-butler)
 
-;;------------------------------------------------------------------------------
-;; Restclient
-;;------------------------------------------------------------------------------
+(add-hook 'prog-mode-hook 'ws-butler-mode)
+
+
 ;; https://github.com/pashky/restclient.el
-
 (require-package 'restclient)
+
+;;-------------------------------------------------------------------------------
+;; Yasnippet
+;;------------------------------------------------------------------------------
+
+(require-package 'yasnippet)
+
+(yas-global-mode 1)
 
 
 (provide 'init-programming)
+
+;;; init-programming.el ends here

@@ -1,13 +1,22 @@
-;;; init.el --- Xitkov's configuration file
+;;; init.el --- Xitkov's Emacs config
+;;
+;; Copyright (c) 2016 Xitkov
+;;
+
+;;; Commentary:
+
+;;; License:
+
+;;; Code:
 
 ;;------------------------------------------------------------------------------
 ;; This file bootstraps the configuration
 ;;------------------------------------------------------------------------------
 
-(let ((minver "23.3"))
-  (when (version<= emacs-version "23.1")
+(let ((minver "24"))
+  (when (version<= emacs-version "24.1")
     (error "Your Emacs is too old -- this config requires v%s or higher" minver)))
-(when (version<= emacs-version "24")
+(when (version<= emacs-version "24.4")
   (message "Your Emacs is old, and some functionality in this config will be disabled. Please upgrade if possible."))
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -15,21 +24,25 @@
 (defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
 (defconst *is-a-mac* (eq system-type 'darwin))
 
+;;; Required if installing via homebrew-emacs
+;; https://github.com/Homebrew/homebrew-emacs
+;;
 ;; (let ((default-directory "/usr/local/share/emacs/site-lisp/"))
 ;;  (normal-top-level-add-subdirs-to-load-path))
 
 
 ;;----------------------------------------------------------------------------
-;; Bootstrap
+;; Core
 ;;----------------------------------------------------------------------------
 
 (add-to-list 'load-path (expand-file-name "core" user-emacs-directory))
-(require 'xt-utils)                     ;; Utilities
+
 (require 'xt-melpa)                     ;; Machinery for installing required packages
 (require 'xt-env-vars)                  ;; Set up $PATH and env
 (require 'xt-sane-defaults)             ;; Sane defaults
-(require 'xt-default-keybindings)       ;; Utilities
-
+(require 'xt-theme)                     ;; Theming
+(require 'xt-misc)                      ;; Miscellaneous
+(require 'xt-utils)                     ;; Utilities
 
 ;;----------------------------------------------------------------------------
 ;; Load other modes and packages
@@ -50,6 +63,5 @@
 
 
 (provide 'init)
-(put 'upcase-region 'disabled nil)
-(put 'set-goal-column 'disabled nil)
-(put 'downcase-region 'disabled nil)
+
+;;; init.el ends here

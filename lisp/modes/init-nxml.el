@@ -3,13 +3,6 @@
 ;;------------------------------------------------------------------------------
 ;; https://github.com/purcell/emacs.d/blob/master/lisp/init-nxml.el
 
-(add-auto-mode
- 'nxml-mode
- (concat "\\."
-         (regexp-opt
-          '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss"
-            "gpx" "tcx" "plist"))
-         "\\'"))
 (setq magic-mode-alist (cons '("<\\?xml " . nxml-mode) magic-mode-alist))
 (fset 'xml-mode 'nxml-mode)
 (add-hook 'nxml-mode-hook (lambda ()

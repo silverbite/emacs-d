@@ -19,5 +19,6 @@
 
 (setq-default org-src-fontify-natively t)
 
+(require-package 'htmlize)
 
 (provide 'init-org)

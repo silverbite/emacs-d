@@ -5,4 +5,6 @@
 
 (require-package 'smarty-mode)
 
+(setq php-lineup-cascaded-calls t)
+
 (provide 'init-php)

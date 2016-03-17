@@ -16,7 +16,13 @@
 
 ;;; show the name of the current function definition in the modeline
 (require 'which-func)
+
+(setq which-func-unknown "n/a")
+
 (which-function-mode 1)
+;; Individual
+;; (add-to-list 'which-func-modes 'ruby-mode)
+;; (add-to-list 'which-func-modes 'emacs-lisp-mode)
 
 
 ;; https://github.com/bbatsov/emacs.d/blob/master/init.el
@@ -100,6 +106,8 @@
 ;; https://github.com/syohex/emacs-git-gutter
 (require-package 'git-gutter)
 (global-git-gutter-mode +1)
+
+(require-package 'git-timemachine)
 
 
 ;;------------------------------------------------------------------------------

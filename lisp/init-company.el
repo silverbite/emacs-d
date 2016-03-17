@@ -33,6 +33,9 @@
 (require-package 'company)
 (require 'company)
 
+(require-package 'company-emoji)
+(add-to-list 'company-backends 'company-emoji)
+
 ;; I don't need tags :)
 (delete 'company-etags company-backends)
 (delete 'company-ctags company-backends)
@@ -71,6 +74,11 @@
 
 (require-package 'readline-complete)
 (add-to-list 'company-backends 'company-readline)
+
+(require 'company-semantic)
+
+(add-to-list 'company-backends 'company-semantic)
+
 ;; (push 'company-readline company-backends)
 
 ;; (require-package 'company-jedi)
@@ -184,5 +192,11 @@
 
 
 (global-company-mode t)
+
+;; (global-semanticdb-minor-mode 1)
+;; (global-semantic-idle-scheduler-mode 1)
+;; (global-semantic-idle-completions-mode 1)
+;; (global-semantic-idle-summary-mode 1)
+;; (semantic-mode 1)
 
 (provide 'init-company)

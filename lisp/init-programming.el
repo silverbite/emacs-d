@@ -73,6 +73,12 @@
 (require-package 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
+;; Every time when the neotree window is opened, let it find current file and jump to node.
+(setq neo-smart-open t)
+
+;; When running ‘projectile-switch-project’ (C-c p p), ‘neotree’ will change root automatically.
+;; (setq projectile-switch-project-action 'neotree-projectile-action)
+
 
 ;; Smart parens
 ;;;https://github.com/Fuco1/smartparens
@@ -80,6 +86,7 @@
 (require 'smartparens-config)
 
 (add-hook 'prog-mode-hook #'smartparens-mode)
+
 
 ;; Expand region
 ;;; https://github.com/atlefren/.emacs.d/blob/master/lisp/init-expand-region.el
@@ -105,7 +112,28 @@
 
 ;; https://github.com/syohex/emacs-git-gutter
 (require-package 'git-gutter)
+
+(setq git-gutter:ask-p nil)
+(setq git-gutter:update-interval 5)
+
 (global-git-gutter-mode +1)
+
+(global-set-key (kbd "C-x v g") 'git-gutter:toggle)
+(global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+
+;; Jump to next/previous hunk
+(global-set-key (kbd "C-x v p") 'git-gutter:previous-hunk)
+(global-set-key (kbd "C-x v n") 'git-gutter:next-hunk)
+
+;; Stage current hunk
+(global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
+
+;; Revert current hunk
+(global-set-key (kbd "C-x v r") 'git-gutter:revert-hunk)
+
+;; Mark current hunk
+(global-set-key (kbd "C-x v SPC") #'git-gutter:mark-hunk)
+
 
 (require-package 'git-timemachine)
 

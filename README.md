@@ -1,6 +1,2 @@
-# Overview
-
-This is my emacs configuration.
-Feel free to use it as you want.
-
-# External packages required to run it
+I dont use this now, I am now using prelude with my own customizations.
+Here - https://github.com/rajats105/prelude
